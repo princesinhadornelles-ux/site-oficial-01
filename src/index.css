@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  --color-brand-primary: #111827;
+  --color-brand-accent: #2563eb;
+  --color-brand-success: #25d366;
+  --color-brand-bg: #f9fafb;
+
+  @keyframes flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  --animate-flash: flash 1s infinite;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-primary antialiased;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
+
+@layer components {
+  .info-card-dark {
+    @apply bg-[#111827] border border-[#1f2a3e] p-8 rounded-3xl transition-all duration-300 hover:border-[#E50914] flex flex-col items-center text-center;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+.container-sleek {
+  @apply max-w-[960px] mx-auto px-4;
+}
+
+.card-sleek {
+  @apply bg-white border border-slate-200 rounded-xl p-5 shadow-sm;
+}
+
+.btn-sleek-primary {
+  @apply bg-brand-accent text-white px-8 py-4 rounded-lg font-bold text-lg uppercase tracking-wider shadow-lg shadow-blue-200 transition-all duration-300 ease-in-out hover:opacity-90;
+}
+
+.btn-sleek-whatsapp {
+  @apply bg-brand-success text-white font-bold px-6 py-3 rounded-full inline-flex items-center gap-2 transition-all duration-300 ease-in-out hover:opacity-90;
+}
+
+.badge-sleek {
+  @apply border border-slate-300 px-3 py-2 rounded-md text-xs text-slate-600 bg-white flex items-center gap-2 font-medium;
+}
+
+.countdown-sleek {
+  @apply font-mono bg-red-100 text-red-800 px-2 py-1 rounded font-bold;
+}
