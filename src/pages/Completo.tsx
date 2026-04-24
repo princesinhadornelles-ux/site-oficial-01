@@ -113,9 +113,9 @@ export function CompletoPage() {
                 </div>
                 <h2 className="text-2xl font-black uppercase tracking-tight">Pagar mais Barato?</h2>
                 <p className="text-slate-500 font-medium leading-relaxed">
-                  Ganhe 50% de DESCONTO real na sua primeira mensalidade usando o cupom <span className="text-brand-accent font-black">QUERO50</span> nos próximos 120 minutos.
+                  Ganhe 30% de DESCONTO na sua primeira mensalidade usando o cupom <span className="text-brand-accent font-black">QUERO30</span>, promoção válida somente para quem pagar o plano mensal nas proximas 2 horas. Corra e garanta sua vaga agora mesmo
                 </p>
-                <a href={getWhatsAppLink("Olá, o que prefiro é PAGAR MAIS BARATO! Quero os 50% de desconto no primeiro mês.", "COMPLETO")} target="_blank" rel="noreferrer" className="w-full py-4 bg-brand-primary text-white rounded-xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-all flex items-center justify-center gap-2">
+                <a href={getWhatsAppLink("Olá, quero usar o cupom QUERO30 para ganhar 30% de desconto na primeira mensalidade do plano mensal!", "COMPLETO")} target="_blank" rel="noreferrer" className="w-full py-4 bg-brand-primary text-white rounded-xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-all flex items-center justify-center gap-2">
                   Eu quero desconto!
                 </a>
               </motion.div>
