@@ -16,7 +16,7 @@ export function Logo({ isDark = false }: LogoProps) {
       </div>
       <div className={`flex flex-col leading-none ${isDark ? 'text-white' : 'text-brand-primary'}`}>
         <span className="text-xl font-black tracking-tighter uppercase">
-          MEGA<span className="text-brand-accent italic">FILMES</span>
+          Filmes<span className="text-brand-accent italic"> My View</span>
         </span>
         <span className={`text-[8px] font-bold tracking-[0.2em] uppercase opacity-50 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
           Portal Premium

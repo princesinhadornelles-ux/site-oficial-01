@@ -26,10 +26,10 @@ export const SITE_CONFIG = {
   email: "princesinhadornelles@gmail.com",
   address: "QUADRA 32, 18, COND CONDOMINIO CENTRO OESTE IV AGUAS LINDAS DE GOIAS – GO, CEP: 72914-218",
   cnpj: "66.387.501/0001-80",
-  description: "Mega Filmes Online - O maior portal de recomendações de filmes e séries. Conteúdo 100% legal.",
+  description: "Filmes My View - O maior portal de recomendações de filmes e séries. Conteúdo 100% legal.",
   regionTitle: "Atendimento em São José dos Campos e Região",
   footerDisclaimer: "Este site não hospeda, transmite ou disponibiliza conteúdos audiovisuais. Apenas recomendamos plataformas oficiais.",
-  copyright: "© 2026 Mega Filmes Online 2026 - Portal em conformidade com Google Ads"
+  copyright: "© 2026 Filmes My View - Portal em conformidade com Google Ads"
 };
 
 export type PoolType = keyof typeof WHATSAPP_POOLS;

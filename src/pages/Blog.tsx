@@ -57,7 +57,7 @@ export function BlogHome() {
         <section className="bg-gradient-to-br from-[#0f172a] to-[#0a0f1c] rounded-[2rem] border border-[#1f2a3e] p-8 md:p-16 mb-12 relative overflow-hidden">
           <div className="relative z-10">
             <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tighter">
-              Mega Filmes Online 2026
+              Filmes My View
             </h1>
             <p className="text-slate-400 text-lg md:text-xl font-medium max-w-2xl mb-8">
               O maior catálogo de recomendações de filmes e séries. Descubra onde assistir de forma 100% legal e segura.
@@ -158,7 +158,7 @@ export function BlogHome() {
         {/* Institutional Sections */}
         <div id="sobre" className="space-y-20 mb-20">
           <section>
-             <h2 className="text-2xl font-black mb-8 border-l-4 border-[#E50914] pl-4 uppercase">Sobre a Mega Filmes Online 2026</h2>
+             <h2 className="text-2xl font-black mb-8 border-l-4 border-[#E50914] pl-4 uppercase">Sobre o Filmes My View</h2>
              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="info-card-dark"><MapPin className="text-[#E50914] mb-4" /> <h3 className="font-bold mb-2">Quem Somos</h3> <p className="text-xs text-slate-500 leading-relaxed font-normal">Empresa brasileira com sede em São José dos Campos - SP, especializada em orientação digital e entretenimento legal.</p></div>
                 <div className="info-card-dark"><ShieldCheck className="text-[#E50914] mb-4" /> <h3 className="font-bold mb-2">Nosso Objetivo</h3> <p className="text-xs text-slate-500 leading-relaxed font-normal">Ajudar pessoas a descobrirem filmes e séries disponíveis em plataformas oficiais da melhor forma possível.</p></div>
