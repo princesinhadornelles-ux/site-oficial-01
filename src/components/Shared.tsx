@@ -12,9 +12,9 @@ export function Navbar() {
   const location = useLocation();
 
   const navLinks = [
-    { name: 'Teste Grátis', path: '/teste' },
-    { name: 'Planos', path: '/comprar' },
-    { name: 'Adquirir', path: '/completo' },
+    { name: 'Saiba Mais', path: '/saibamais' },
+    { name: 'Planos', path: '/planos' },
+    { name: 'Adquirir', path: '/sabermais' },
     { name: 'Blog', path: '/blog' },
     { name: 'Sobre', path: '/sobre' },
     { name: 'Contato', path: '/contato' },
@@ -81,7 +81,7 @@ export function Navbar() {
               ))}
               <div className="pt-4 flex flex-col gap-2 border-t border-slate-100">
                 <a
-                  href={getWhatsAppLink("Olá, preciso de ajuda ou gostaria de um teste grátis.", "TESTE")}
+                  href={getWhatsAppLink("Olá, gostaria de saber mais informações.", "TESTE")}
                   target="_blank"
                   rel="noreferrer"
                   className="w-full bg-brand-success text-white px-4 py-3 rounded-md text-center font-bold text-xs uppercase"
@@ -142,8 +142,8 @@ export function WhatsAppButton() {
   const location = useLocation();
   // Se estiver na página de teste, usa TESTE, se estiver em comprar usa COMPRA, se estiver em completo usa COMPLETO
   let pool: PoolType = "TESTE";
-  if (location.pathname === '/comprar') pool = "COMPRA";
-  if (location.pathname === '/completo') pool = "COMPLETO";
+  if (location.pathname === '/planos') pool = "COMPRA";
+  if (location.pathname === '/sabermais') pool = "COMPLETO";
   
   return (
     <motion.a

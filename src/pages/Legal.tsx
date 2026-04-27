@@ -81,7 +81,7 @@ export function AboutPage() {
         <div>
           <h2 className="text-2xl font-bold text-brand-primary mb-4">Nossa Missão</h2>
           <p className="text-slate-600 leading-relaxed mb-6">
-            O <strong>{SITE_CONFIG.name}</strong> nasceu da necessidade de oferecer um serviço de entretenimento digital que fosse, acima de tudo, estável e honesto. Em um mercado saturado de promessas vazias, decidimos fazer diferente: oferecer qualidade real e deixar que o cliente julgue através de testes gratuitos.
+            O <strong>{SITE_CONFIG.name}</strong> nasceu da necessidade de oferecer um serviço de entretenimento digital que fosse, acima de tudo, estável e honesto. Em um mercado saturado de promessas vazias, decidimos fazer diferente: oferecer qualidade real e deixar que o cliente conheça o serviço gratuitamente antes de tomar qualquer decisão.
           </p>
           <p className="text-slate-600 leading-relaxed">
             Nosso objetivo é ser a referência nacional em entretenimento via streaming, proporcionando uma experiência de cinema no conforto da sua casa, sem travamentos e com o melhor custo-benefício.

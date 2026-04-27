@@ -19,9 +19,9 @@ function ScrollToTop() {
 
 function AppContent() {
   const location = useLocation();
-  const isLandingPage = location.pathname === '/teste' || location.pathname === '/comprar' || location.pathname === '/completo';
-  const isTestePage = location.pathname === '/teste';
-  const isLandingWithWhatsApp = location.pathname === '/teste' || location.pathname === '/completo';
+  const isLandingPage = location.pathname === '/saibamais' || location.pathname === '/planos' || location.pathname === '/sabermais';
+  const isTestePage = location.pathname === '/saibamais';
+  const isLandingWithWhatsApp = location.pathname === '/saibamais' || location.pathname === '/sabermais';
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -31,9 +31,9 @@ function AppContent() {
           <Route path="/" element={<BlogHome />} />
           <Route path="/blog" element={<BlogHome />} />
           <Route path="/blog/:id" element={<BlogPost />} />
-          <Route path="/teste" element={<TestePage />} />
-          <Route path="/comprar" element={<ComprarPage />} />
-          <Route path="/completo" element={<CompletoPage />} />
+          <Route path="/saibamais" element={<TestePage />} />
+          <Route path="/planos" element={<ComprarPage />} />
+          <Route path="/sabermais" element={<CompletoPage />} />
           <Route path="/sobre" element={<AboutPage />} />
           <Route path="/contato" element={<ContactPage />} />
           <Route path="/privacidade" element={<PrivacyPage />} />

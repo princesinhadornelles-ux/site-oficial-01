@@ -17,7 +17,7 @@ const COMMENTS = [
   "Suporte muito atencioso e educado.", "Não fico mais sem esse serviço.",
   "Transparência total em tudo, nota mil.", "Melhor custo benefício do mercado.",
   "Sinal limpo e sem delay.", "Instalação foi super simples com a ajuda deles.",
-  "Parabéns pelo trabalho, qualidade impecável.", "Fiz o teste e assinei na hora.",
+  "Parabéns pelo trabalho, qualidade impecável.", "Fui em Saiba Mais, ganhei gratuitamente um acesso de 4 horas para conhecer o serviço e assinei na hora.",
   "Economizei muito saindo da TV a cabo tradicional.", "O melhor pós-venda que já experimentei.",
   "Sempre atualizado com as últimas novidades.", "Recomendei para 5 amigos e todos amaram.",
   "Pode confiar, os caras são profissionais mesmo.", "Futebol liso sem travar, era o que eu queria.",
@@ -26,11 +26,11 @@ const COMMENTS = [
   "Ativação em menos de 5 minutos, recorde!", "Suporte técnico entende muito do assunto.",
   "Qualidade sonora também é excelente.", "Não troco por nenhum outro.",
   "Transmissão fluída em qualquer dispositivo.", "Aproveitei a promoção e valeu muito.",
-  "Segurança e privacidade garantidas, show.", "O grupo de teste é muito organizado.",
+  "Segurança e privacidade garantidas, show.", "O suporte e o atendimento são muito organizados.",
   "Tudo funcionando perfeitamente há meses.", "O melhor conteúdo infantil pros meus filhos.",
   "A grade de esportes é a mais completa.", "Suporte via WhatsApp é muito prático.",
   "Resolução monstra, assisto tudo em HD/4K.", "Nunca vi nada igual no Brasil.",
-  "Sério, testem e não vão se arrepender.", "Top top top!"
+  "Sério, conheçam o serviço e não vão se arrepender.", "Top top top!"
 ];
 
 const FAKE_BUYERS = [
@@ -242,7 +242,7 @@ export function CompletoPage() {
                </p>
                <div className="mb-8">
                   <p className="text-[10px] text-slate-400 leading-tight italic">
-                    * somente na aquisição de algum produto fisico, serviços e acessos são disponibilizados automaticamente no ato do pagamento, e o teste gratuito serve exatamente para o cliente comprar somente se estiver certeza absolutada, compre somente se tudo estiver funcionando corretamente e se te agradar.
+                    * somente na aquisição de algum produto fisico, serviços e acessos são disponibilizados automaticamente no ato do pagamento. A avaliação gratuita serve exatamente para o cliente comprar somente se estiver com certeza absoluta. Compre somente se tudo estiver funcionando corretamente e se te agradar.
                   </p>
                </div>
                <a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-block bg-brand-accent text-white px-10 py-5 rounded-2xl font-black text-xl uppercase tracking-tighter hover:brightness-110 transition-all shadow-xl shadow-blue-500/20">
