@@ -8,7 +8,7 @@ import { Countdown, WhatsAppButton, Logo } from '@/src/components/Shared';
 const COMMENTS = [
   "Melhor serviço que já usei, suporte nota 10!", "Fiquei impressionado com a qualidade da imagem.",
   "Estabilidade total, não trava nem no futebol ao vivo.", "O atendimento humano faz toda a diferença.",
-  "Ativação super rápida, recomendo a todos.", "Preço justo pelo que oferece, top demais.",
+  "Configuração super rápida com ajuda do suporte, recomendo a todos.", "Preço justo pelo que oferece, top demais.",
   "Finalmente encontrei uma tecnologia que presta.", "Uso há meses e nunca tive problemas.",
   "O suporte resolveu minha dúvida em minutos.", "Gostei muito da interface, fácil de usar.",
   "Muito estável no 4K, sensacional.", "Vale cada centavo investido.",
@@ -23,7 +23,7 @@ const COMMENTS = [
   "Pode confiar, os caras são profissionais mesmo.", "Futebol liso sem travar, era o que eu queria.",
   "Atendimento rápido até no feriado.", "Interface intuitiva até pra quem não entende muito.",
   "Plataforma robusta, aguenta todo mundo online.", "Zero reclamações, só elogios.",
-  "Ativação em menos de 5 minutos, recorde!", "Suporte técnico entende muito do assunto.",
+  "Configuração em menos de 5 minutos com o suporte, recorde!", "Suporte técnico entende muito do assunto.",
   "Qualidade sonora também é excelente.", "Não troco por nenhum outro.",
   "Transmissão fluída em qualquer dispositivo.", "Aproveitei a promoção e valeu muito.",
   "Segurança e privacidade garantidas, show.", "O suporte e o atendimento são muito organizados.",
@@ -93,6 +93,11 @@ export function CompletoPage() {
 
       <main className="pt-24 pb-20">
         <div className="container-sleek">
+          {/* Aviso de transparência */}
+          <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 mb-8 text-xs text-blue-800 leading-relaxed">
+            <strong>Aviso:</strong> O Filmes My View é um guia informativo independente. Não vendemos IPTV, listas de canais, login, senha, streaming próprio, download ou acesso a filmes, séries e canais. Nosso objetivo é apenas orientar usuários sobre onde encontrar conteúdos em plataformas oficiais e legais.
+          </div>
+
           {/* Hero: O que você prefere? */}
           <section id="testegratis" className="text-center mb-16 py-10">
             <motion.h1 
@@ -158,7 +163,7 @@ export function CompletoPage() {
                   <p className={`text-xs mb-8 font-bold ${plan.popular ? 'text-brand-accent' : 'text-slate-400'}`}>{plan.desc}</p>
                   
                   <ul className="space-y-4 mb-10">
-                    {["Suporte VIP", "Canais 4K/FullHD", "Ativação Instantânea", "Sem Fidelidade"].map((item, j) => (
+                    {["Suporte VIP", "Orientação em 4K/FullHD", "Configuração Assistida", "Sem Fidelidade"].map((item, j) => (
                       <li key={j} className="flex items-center gap-2 text-sm font-medium">
                         <Check size={16} className={plan.popular ? 'text-brand-accent' : 'text-brand-success'} strokeWidth={3} />
                         {item}

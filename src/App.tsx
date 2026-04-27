@@ -6,7 +6,7 @@ import { BlogPost } from './pages/BlogPost';
 import { TestePage } from './pages/Teste';
 import { ComprarPage } from './pages/Comprar';
 import { CompletoPage } from './pages/Completo';
-import { PrivacyPage, TermsPage, AboutPage, ContactPage } from './pages/Legal';
+import { PrivacyPage, TermsPage, AboutPage, ContactPage, AvisoLegalPage, DireitosAutoraisPage } from './pages/Legal';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -38,6 +38,8 @@ function AppContent() {
           <Route path="/contato" element={<ContactPage />} />
           <Route path="/privacidade" element={<PrivacyPage />} />
           <Route path="/termos" element={<TermsPage />} />
+          <Route path="/aviso-legal" element={<AvisoLegalPage />} />
+          <Route path="/direitos-autorais" element={<DireitosAutoraisPage />} />
         </Routes>
       </main>
       {!isLandingPage && <Footer />}

@@ -50,7 +50,7 @@ export function getActiveWhatsApp(pool: PoolType = "TESTE"): string {
 }
 
 export function getWhatsAppLink(
-  message: string = "Olá, gostaria de saber mais sobre o teste grátis.",
+  message: string = "Olá, gostaria de saber mais sobre o guia Filmes My View.",
   pool: PoolType = "TESTE"
 ): string {
   const number = getActiveWhatsApp(pool);

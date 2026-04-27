@@ -73,62 +73,139 @@ export function AboutPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
       <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-brand-primary mb-4 tracking-tight">Transparência e Inovação</h1>
-        <p className="text-lg text-slate-500 max-w-2xl mx-auto">Conheça a história e os valores que movem o {SITE_CONFIG.name}.</p>
+        <h1 className="text-4xl md:text-5xl font-extrabold text-brand-primary mb-4 tracking-tight">Sobre o Filmes My View</h1>
+        <p className="text-lg text-slate-500 max-w-2xl mx-auto">Um guia informativo independente para quem quer encontrar filmes e séries em plataformas legais.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20 text-left">
+      <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6 mb-12 text-sm text-blue-800 leading-relaxed">
+        <strong>Aviso de transparência:</strong> O Filmes My View é um guia informativo independente. <strong>Não vendemos IPTV, listas de canais, login, senha, streaming próprio, downloads, desbloqueios ou acesso a filmes, séries e canais.</strong> Nosso objetivo é exclusivamente orientar usuários sobre onde encontrar conteúdos em plataformas oficiais e legais.
+      </div>
+
+      <div className="space-y-12 text-left mb-16">
         <div>
-          <h2 className="text-2xl font-bold text-brand-primary mb-4">Nossa Missão</h2>
-          <p className="text-slate-600 leading-relaxed mb-6">
-            O <strong>{SITE_CONFIG.name}</strong> nasceu da necessidade de oferecer um serviço de entretenimento digital que fosse, acima de tudo, estável e honesto. Em um mercado saturado de promessas vazias, decidimos fazer diferente: oferecer qualidade real e deixar que o cliente conheça o serviço gratuitamente antes de tomar qualquer decisão.
-          </p>
+          <h2 className="text-2xl font-bold text-brand-primary mb-4">O que é o Filmes My View?</h2>
           <p className="text-slate-600 leading-relaxed">
-            Nosso objetivo é ser a referência nacional em entretenimento via streaming, proporcionando uma experiência de cinema no conforto da sua casa, sem travamentos e com o melhor custo-benefício.
+            O <strong>Filmes My View</strong> é um portal informativo e independente criado para ajudar usuários a descobrirem onde encontrar filmes e séries de forma legal e segura. Atuamos como um guia de referência, orientando sobre plataformas de streaming oficiais disponíveis no Brasil e no mundo.
           </p>
         </div>
-        <div className="bg-slate-100 aspect-video rounded-3xl overflow-hidden shadow-inner flex items-center justify-center">
-           <img src="https://picsum.photos/seed/office/800/600" alt="Nosso escritório" className="object-cover w-full h-full opacity-80" referrerPolicy="no-referrer" />
+
+        <div>
+          <h2 className="text-2xl font-bold text-brand-primary mb-4">O que NÃO fazemos</h2>
+          <ul className="space-y-2 text-slate-600 list-none">
+            {[
+              "Não vendemos IPTV ou qualquer serviço de transmissão",
+              "Não fornecemos listas de canais, login ou senha",
+              "Não hospedamos, transmitimos ou distribuímos filmes, séries ou canais",
+              "Não oferecemos streaming próprio ou acesso desbloqueado a conteúdo",
+              "Não somos afiliados oficiais de Netflix, Prime Video, Disney+, Max, Globoplay ou outras plataformas, salvo indicação expressa",
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-red-400 font-bold mt-0.5">✕</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-bold text-brand-primary mb-4">O que fazemos</h2>
+          <ul className="space-y-2 text-slate-600 list-none">
+            {[
+              "Orientamos usuários sobre plataformas oficiais onde determinados conteúdos podem estar disponíveis legalmente",
+              "Indicamos as melhores plataformas de acordo com o perfil e interesse do usuário",
+              "Oferecemos suporte informativo para configuração de dispositivos nas plataformas oficiais",
+              "Publicamos guias, listas e recomendações sobre o universo do cinema e séries",
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-green-500 font-bold mt-0.5">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-bold text-brand-primary mb-4">Como funciona nosso atendimento</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { n: "1", title: "Contato", desc: "Você entra em contato conosco via formulário ou WhatsApp com sua dúvida ou necessidade." },
+              { n: "2", title: "Orientação", desc: "Nossa equipe analisa seu perfil e indica as plataformas oficiais mais adequadas para você." },
+              { n: "3", title: "Acompanhamento", desc: "Auxiliamos na configuração de dispositivos para aproveitar ao máximo cada plataforma oficial." },
+            ].map(({ n, title, desc }) => (
+              <div key={n} className="bg-slate-50 p-8 rounded-3xl border border-slate-100 text-center">
+                <div className="w-12 h-12 bg-brand-primary text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">{n}</div>
+                <h4 className="font-bold mb-2">{title}</h4>
+                <p className="text-xs text-slate-400">{desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+    </div>
+  );
+}
 
-      <div className="bg-white p-10 md:p-16 rounded-[3rem] shadow-soft border border-slate-100 text-left mb-20 text-center">
-        <h2 className="text-3xl font-extrabold text-brand-primary mb-8">Quem Atendemos</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="flex flex-col gap-4">
-            <h3 className="font-bold text-brand-primary uppercase tracking-tighter">Clientes Residenciais</h3>
-            <p className="text-sm text-slate-500">Famílias que buscam recomendações confiáveis e estabilidade para sua sala de cinema em casa.</p>
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="font-bold text-brand-primary uppercase tracking-tighter">Empresas</h3>
-            <p className="text-sm text-slate-500">Consultoria para consumo consciente e otimizado de conteúdo digital em ambientes corporativos.</p>
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="font-bold text-brand-primary uppercase tracking-tighter">Suporte Técnico</h3>
-            <p className="text-sm text-slate-500">Ajudamos você na configuração de dispositivos para extrair a melhor imagem de cada plataforma.</p>
-          </div>
-        </div>
+export function AvisoLegalPage() {
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-16 prose prose-slate">
+      <h1 className="text-3xl font-extrabold text-brand-primary mb-8">Aviso Legal</h1>
+
+      <div className="bg-yellow-50 border border-yellow-300 rounded-2xl p-6 mb-8 text-sm text-yellow-900 leading-relaxed not-prose">
+        <strong>Leia com atenção antes de utilizar este site.</strong>
       </div>
 
-      <div className="text-center">
-        <h2 className="text-3xl font-extrabold text-brand-primary mb-12">Como Funciona nosso Atendimento</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100">
-            <div className="w-12 h-12 bg-brand-primary text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">1</div>
-            <h4 className="font-bold mb-2">Contato</h4>
-            <p className="text-xs text-slate-400">Você entra em contato conosco via formulário ou WhatsApp.</p>
-          </div>
-          <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100">
-            <div className="w-12 h-12 bg-brand-primary text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">2</div>
-            <h4 className="font-bold mb-2">Análise</h4>
-            <p className="text-xs text-slate-400">Analisamos sua necessidade de entretenimento e buscamos as melhores opções.</p>
-          </div>
-          <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100">
-            <div className="w-12 h-12 bg-brand-primary text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">3</div>
-            <h4 className="font-bold mb-2">Retorno</h4>
-            <p className="text-xs text-slate-400">Enviamos as indicações personalizadas e orientamos sobre as plataformas oficiais.</p>
-          </div>
-        </div>
+      <h2 className="text-xl font-bold mt-8 mb-4">1. Natureza do Serviço</h2>
+      <p>O <strong>Filmes My View</strong> é um guia informativo independente. Não somos representantes oficiais de Netflix, Prime Video, Disney+, Max, Globoplay ou qualquer outra plataforma de streaming, salvo indicação expressa.</p>
+
+      <h2 className="text-xl font-bold mt-8 mb-4">2. O que não oferecemos</h2>
+      <p>O Filmes My View <strong>não vende</strong> e <strong>não oferece</strong>:</p>
+      <ul>
+        <li>IPTV ou qualquer serviço de transmissão de canais</li>
+        <li>Listas de canais ou conteúdo audiovisual</li>
+        <li>Login, senha ou credenciais de acesso a plataformas</li>
+        <li>Streaming próprio ou hospedagem de conteúdo</li>
+        <li>Downloads de filmes, séries ou programas</li>
+        <li>Desbloqueio ou acesso a conteúdo protegido</li>
+        <li>Qualquer serviço que viole direitos autorais ou a legislação vigente</li>
+      </ul>
+
+      <h2 className="text-xl font-bold mt-8 mb-4">3. Propriedade Intelectual</h2>
+      <p>Todas as marcas, logotipos e nomes de plataformas mencionados neste site (como Netflix, Prime Video, Disney+, Max, Globoplay, entre outros) pertencem aos seus respectivos proprietários. O Filmes My View não possui qualquer vínculo oficial com essas marcas.</p>
+
+      <h2 className="text-xl font-bold mt-8 mb-4">4. Limitação de Responsabilidade</h2>
+      <p>As informações disponibilizadas neste site têm caráter exclusivamente informativo. O Filmes My View não se responsabiliza por decisões tomadas com base nas orientações aqui apresentadas, nem pela disponibilidade de conteúdos nas plataformas indicadas, que pode variar a qualquer momento.</p>
+
+      <h2 className="text-xl font-bold mt-8 mb-4">5. Conformidade Legal</h2>
+      <p>Este site opera em conformidade com a legislação brasileira vigente, incluindo o Marco Civil da Internet (Lei nº 12.965/2014), a Lei Geral de Proteção de Dados (Lei nº 13.709/2018) e as demais normas aplicáveis.</p>
+
+      <div className="mt-12 pt-8 border-t border-slate-100 text-xs text-slate-500">
+        Última atualização: <strong>{new Date().toLocaleDateString('pt-BR')}</strong>
+      </div>
+    </div>
+  );
+}
+
+export function DireitosAutoraisPage() {
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-16 prose prose-slate">
+      <h1 className="text-3xl font-extrabold text-brand-primary mb-8">Direitos Autorais</h1>
+
+      <h2 className="text-xl font-bold mt-8 mb-4">1. Sobre o Conteúdo deste Site</h2>
+      <p>O <strong>Filmes My View</strong> não hospeda, transmite, armazena, vende ou distribui filmes, séries, canais ou qualquer conteúdo protegido por direitos autorais.</p>
+      <p>Nosso objetivo é exclusivamente orientar usuários sobre plataformas oficiais onde determinados conteúdos podem estar disponíveis legalmente.</p>
+
+      <h2 className="text-xl font-bold mt-8 mb-4">2. Marcas e Logotipos de Terceiros</h2>
+      <p>Eventuais menções a marcas como Netflix, Prime Video, Disney+, Max, Globoplay, Apple TV+, Paramount+, entre outras, são feitas apenas para fins informativos e de referência. O Filmes My View não possui vínculo oficial com essas plataformas e não representa nenhuma delas.</p>
+      <p>Todos os nomes, logotipos e marcas registradas citados pertencem exclusivamente aos seus respectivos proprietários.</p>
+
+      <h2 className="text-xl font-bold mt-8 mb-4">3. Conteúdo Próprio</h2>
+      <p>Os textos, guias, listas e recomendações produzidos pela equipe do Filmes My View são de autoria própria e protegidos por direitos autorais. É vedada a reprodução total ou parcial sem autorização prévia por escrito.</p>
+
+      <h2 className="text-xl font-bold mt-8 mb-4">4. Notificação de Infração</h2>
+      <p>Se você acredita que algum conteúdo deste site viola direitos autorais, entre em contato pelo e-mail <strong>{SITE_CONFIG.email}</strong> com as informações necessárias para análise e providências cabíveis.</p>
+
+      <div className="mt-12 pt-8 border-t border-slate-100 text-xs text-slate-500">
+        Última atualização: <strong>{new Date().toLocaleDateString('pt-BR')}</strong>
       </div>
     </div>
   );
@@ -163,7 +240,7 @@ export function ContactPage() {
               </div>
               <h3 className="font-bold text-brand-primary">WhatsApp</h3>
             </div>
-            <p className="text-slate-500 text-sm mb-2">Suporte imediato e ativações:</p>
+            <p className="text-slate-500 text-sm mb-2">Dúvidas e orientações:</p>
             <p className="text-brand-success font-bold">Disponível no botão flutuante</p>
           </div>
 

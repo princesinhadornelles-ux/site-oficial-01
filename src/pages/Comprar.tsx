@@ -9,7 +9,7 @@ const TESTIMONIALS = [
   { name: "Fernanda Costa",     message: "Paguei o plano trimestral e valeu cada centavo. Muito mais barato que a concorrência e entrega o dobro de estabilidade.", date: "Hoje" },
   { name: "Bruno Souza",        message: "Fui em Saiba Mais e ganhei um acesso de 4 horas para conhecer o serviço. Mudei de canal mil vezes e não deu um delay sequer.", date: "Ontem" },
   { name: "Luciana M.",         message: "Finalmente um serviço que presta no Brasil. O preço é justo e o sinal é limpo. Recomendo pra toda a família.", date: "Ontem" },
-  { name: "Gustavo Henrique",   message: "Impressionado com a velocidade de ativação. Fiz o pix e em menos de 1 minuto já tava com os acessos. Praticidade total.", date: "Ontem" },
+  { name: "Gustavo Henrique",   message: "Impressionado com a rapidez do atendimento. Entrei em contato e em menos de 1 minuto já recebi todas as orientações. Praticidade total.", date: "Ontem" },
   { name: "Sílvia Helena",      message: "O melhor suporte que já usei. Tive uma dúvida na TV e me mandaram até vídeo explicando. Nota mil!", date: "2 dias atrás" },
   { name: "Tiago Oliveira",     message: "Custo benefício imbatível. Já conheci vários serviços, mas esse aqui não tem comparação, é o mais estável de todos.", date: "2 dias atrás" },
   { name: "Mariana Dias",       message: "Uso faz 6 meses e nunca tive problema. Quando tem atualização eles avisam antes, transparência total.", date: "3 dias atrás" },
@@ -24,7 +24,7 @@ const TESTIMONIALS = [
   { name: "Rodrigo Pinto",      message: "Suporte respondeu minha dúvida em 90 segundos no WhatsApp. Isso não tem preço. Serviço nota 10.", date: "Ontem" },
   { name: "Isabela Fonseca",    message: "Uso no celular, tablet e TV ao mesmo tempo e não cai a qualidade em nenhum. Fantástico!", date: "2 dias atrás" },
   { name: "Marcelo Teixeira",   message: "Já indiquei para 4 amigos. Todos continuam usando. Quando o serviço é bom a indicação vem natural.", date: "2 dias atrás" },
-  { name: "Vanessa Lopes",      message: "Ativação em menos de 5 minutos depois do pagamento. Nunca vi isso antes. Equipe muito organizada.", date: "3 dias atrás" },
+  { name: "Vanessa Lopes",      message: "Configuração concluída em menos de 5 minutos com a ajuda do suporte. Nunca vi isso antes. Equipe muito organizada.", date: "3 dias atrás" },
   { name: "Diego Azevedo",      message: "Assino há 1 ano e nunca precisei reclamar. Zero problemas, zero travamentos. Isso diz tudo.", date: "3 dias atrás" },
   { name: "Tatiane Borges",     message: "O plano anual valia demais, economizei quase R$170 em relação ao mensal. Sem arrependimento.", date: "4 dias atrás" },
   { name: "Henrique Moraes",    message: "Suporte via WhatsApp é humano de verdade. Me atenderam num sábado à noite sem demora nenhuma.", date: "4 dias atrás" },
@@ -99,6 +99,11 @@ export function ComprarPage() {
       </header>
 
       <div className="container-sleek py-10 md:py-20">
+        {/* Aviso de transparência obrigatório */}
+        <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 mb-8 text-xs text-blue-800 leading-relaxed">
+          <strong>Aviso importante:</strong> O Filmes My View não vende IPTV, listas de canais, login, senha, streaming próprio, filmes, séries, canais, downloads ou acesso a conteúdo audiovisual. Nossos conteúdos e eventuais serviços são apenas informativos, voltados a orientar usuários sobre onde encontrar filmes e séries em plataformas oficiais e legais.
+        </div>
+
         {/* Banner de Oferta - Verde com bordas pretas grossas */}
         <section id="testegratis" className="bg-[#22c55e] border-[6px] border-black mb-12 text-center p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] rounded-3xl">
           <h2 className="text-black font-black uppercase tracking-tighter text-2xl md:text-3xl mb-6 italic">

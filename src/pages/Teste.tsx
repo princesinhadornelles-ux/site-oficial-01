@@ -63,7 +63,7 @@ function getSlotCTA(slots: number): { label: string; cls: string } {
 
 const TESTIMONIALS = [
   { initials: "JD", name: "João Duarte",      time: "Cliente há 6 meses",  msg: "Fui em Saiba Mais, ganhei gratuitamente um acesso de 4 horas para conhecer o serviço. O sinal não trava e o suporte foi super atencioso na hora da instalação." },
-  { initials: "MC", name: "Mariana Costa",    time: "Cliente há 3 meses",  msg: "Achei que ia ser complicado, mas a ativação foi em menos de 2 minutos. Qualidade de imagem impecável, uso no celular, TV e notebook sem problema nenhum." },
+  { initials: "MC", name: "Mariana Costa",    time: "Cliente há 3 meses",  msg: "Achei que ia ser complicado, mas a configuração com o suporte foi em menos de 2 minutos. Orientação impecável, uso no celular, TV e notebook sem problema nenhum." },
   { initials: "RS", name: "Rafael Souza",     time: "Cliente há 8 meses",  msg: "O suporte humano é o diferencial. Toda vez que precisei, respondem rápido e resolvem de verdade. Nunca vi isso em outro serviço do tipo." },
   { initials: "AL", name: "Ana Luiza",        time: "Cliente há 1 ano",    msg: "Preço justo e qualidade top. Já indiquei pra toda a família. Meu marido era cético, mas depois que conheceu o serviço assinou na hora." },
   { initials: "FP", name: "Felipe Prado",     time: "Cliente há 4 meses",  msg: "Fiquei surpreso com a estabilidade. Assisto futebol ao vivo sem travar nenhuma vez. Vale muito cada centavo do plano." },
@@ -77,7 +77,7 @@ const TESTIMONIALS = [
   { initials: "DV", name: "Diego Vasconcelos",time: "Cliente há 11 meses", msg: "Sou exigente com qualidade de imagem e esse serviço atende perfeitamente. HD e 4K sem travamento, mesmo nos horários de pico." },
   { initials: "NM", name: "Natália Moura",    time: "Cliente há 4 meses",  msg: "Vim pelo preço e fiquei pela qualidade. O primeiro mês com desconto me deu a oportunidade de ver que vale muito mais do que cobram." },
   { initials: "RB", name: "Ricardo Barbosa",  time: "Cliente há 8 meses",  msg: "Transparência total. O que prometem na página é exatamente o que entregam. Isso é raro hoje em dia. Nunca fui enganado." },
-  { initials: "SM", name: "Sabrina Melo",     time: "Cliente há 2 meses",  msg: "Instalação simples, ativação rápida e suporte sempre disponível. Tudo que eu precisava num serviço digital. Nota dez sem exagero." },
+  { initials: "SM", name: "Sabrina Melo",     time: "Cliente há 2 meses",  msg: "Configuração simples com o suporte e atendimento sempre disponível. Tudo que eu precisava num serviço de orientação digital. Nota dez sem exagero." },
   { initials: "ED", name: "Eduardo Dias",     time: "Cliente há 6 meses",  msg: "Uso principalmente para séries e filmes em 4K. A qualidade é incrível e nunca perdi uma cena por buffering. Totalmente recomendado." },
   { initials: "VP", name: "Vinicius Pereira", time: "Cliente há 5 meses",  msg: "O custo-benefício é imbatível. Pago menos da metade do que pagava antes e tenho uma qualidade muito superior. Não tem pra onde correr." },
   { initials: "LC", name: "Larissa Campos",   time: "Cliente há 7 meses",  msg: "Gostei demais da atenção no atendimento. Fizeram questão de me explicar tudo antes de eu assinar. Senti segurança desde a primeira mensagem." },
@@ -155,6 +155,9 @@ export function TestePage() {
       </header>
 
       <div id="testegratis" className="container-sleek py-10 md:py-20">
+        <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 mb-8 text-xs text-blue-800 leading-relaxed">
+          <strong>Aviso:</strong> O Filmes My View é um guia informativo independente. Não vendemos IPTV, listas de canais, login, senha, streaming próprio, download ou acesso a filmes, séries e canais. Nosso objetivo é apenas orientar usuários sobre onde encontrar conteúdos em plataformas oficiais e legais.
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Column: Content */}
           <div className="md:col-span-7">

@@ -124,15 +124,20 @@ export function Footer() {
         </div>
         <div className="text-[11px] leading-relaxed">
           <strong className={`${isBlog ? 'text-white' : 'text-brand-primary'} block mb-2 uppercase tracking-widest opacity-50`}>Legal</strong>
-          <div className="flex gap-4 mb-3 font-bold text-brand-accent underline">
+          <div className="flex flex-wrap gap-x-4 gap-y-1 mb-3 font-bold text-brand-accent underline">
             <Link to="/privacidade">Privacidade</Link>
             <Link to="/termos">Termos de Uso</Link>
+            <Link to="/aviso-legal">Aviso Legal</Link>
+            <Link to="/direitos-autorais">Direitos Autorais</Link>
           </div>
           <div className="text-slate-400 mt-2">
             {SITE_CONFIG.copyright}<br />
             CNPJ: {SITE_CONFIG.cnpj}
           </div>
         </div>
+      </div>
+      <div className={`border-t mt-8 pt-6 text-[10px] text-center leading-relaxed ${isBlog ? 'border-[#1f2a3e] text-slate-600' : 'border-slate-100 text-slate-400'}`}>
+        <strong>Filmes My View</strong> é um guia informativo independente. Não vendemos IPTV, listas de canais, streaming próprio ou acesso a filmes, séries e canais. Apenas orientamos usuários sobre plataformas oficiais e legais.
       </div>
     </footer>
   );
