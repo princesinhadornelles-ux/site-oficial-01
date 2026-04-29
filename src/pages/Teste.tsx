@@ -85,7 +85,7 @@ const TESTIMONIALS = [
 ];
 
 export function TestePage() {
-  const whatsappUrl = getWhatsAppLink("Olá, quero saber mais sobre o serviço e conhecer os planos disponíveis.", "TESTE");
+  const whatsappUrl = getWhatsAppLink("Olá, gostaria de fazer um _*teste*_ para conhecer o serviço, pode me ajudar?", "TESTE");
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -147,9 +147,9 @@ export function TestePage() {
             href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
-            className="bg-brand-accent text-white px-6 py-3 rounded-lg font-bold text-xs uppercase hover:opacity-90 transition-smooth shadow-lg shadow-blue-200"
+            className="bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold text-xs uppercase hover:opacity-90 transition-smooth shadow-lg shadow-green-200 flex items-center gap-2"
           >
-            Saiba Mais
+            Chamar No Whatsapp
           </a>
         </div>
       </header>
@@ -204,13 +204,13 @@ export function TestePage() {
               </h3>
               <div className="space-y-3">
                 {[
-                  { name: "Anual: 40% OFF", msg: "PLANO ANUAL ECONOMIA DE 40%" },
-                  { name: "COMPRE 1 LEVE 2", msg: "COMPRE 1 LEVE 2" },
-                  { name: "1º Mês: R$ 25,00", msg: "DESCONTO INICIAL PRIMEIRO MÊS R$ 25,00" }
+                  { name: "Anual: 40% OFF" },
+                  { name: "COMPRE 1 LEVE 2" },
+                  { name: "1º Mês: R$ 25,00" }
                 ].map((item, index) => (
                   <a 
                     key={index}
-                    href={getWhatsAppLink(`Quero saber mais sobre a promoção ${item.msg}`, "TESTE")}
+                    href={whatsappUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="flex gap-2 items-center text-[10px] font-black text-white uppercase tracking-wider p-3 border border-white/30 rounded-lg hover:bg-white hover:text-red-600 transition-smooth bg-red-700/30"

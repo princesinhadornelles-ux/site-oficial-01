@@ -1,12 +1,35 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Navbar, Footer, WhatsAppButton } from './components/Shared';
+
+declare global {
+  interface Window {
+    gtag_report_conversion: (url?: string) => boolean;
+  }
+}
 import { BlogHome } from './pages/Blog';
 import { BlogPost } from './pages/BlogPost';
 import { TestePage } from './pages/Teste';
 import { ComprarPage } from './pages/Comprar';
 import { CompletoPage } from './pages/Completo';
 import { PrivacyPage, TermsPage, AboutPage, ContactPage, AvisoLegalPage, DireitosAutoraisPage } from './pages/Legal';
+
+// Fires Google Ads conversion on every WhatsApp link click across all pages
+function WhatsAppConversionTracker() {
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      const anchor = (e.target as HTMLElement).closest('a');
+      if (anchor && anchor.href && anchor.href.includes('wa.me')) {
+        if (typeof window.gtag_report_conversion === 'function') {
+          window.gtag_report_conversion();
+        }
+      }
+    }
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
+  return null;
+}
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -52,6 +75,7 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
+      <WhatsAppConversionTracker />
       <AppContent />
     </Router>
   );

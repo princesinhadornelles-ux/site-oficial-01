@@ -71,7 +71,7 @@ export function ComprarPage() {
   const [page, setPage] = useState(0);
   const [paused, setPaused] = useState(false);
   const visibleTestimonials = TESTIMONIALS.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
-  const whatsappUrl = getWhatsAppLink("Olá, gostaria de saber mais sobre os planos.", "COMPRA");
+  const whatsappUrl = getWhatsAppLink("Olá, gostaria de _*comprar*_ o serviço, para conhecer melhor posso fazer um teste?", "COMPRA");
 
   useEffect(() => {
     if (paused) return;
@@ -91,9 +91,9 @@ export function ComprarPage() {
             href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
-            className="text-slate-500 font-bold text-sm hover:text-brand-accent transition-smooth"
+            className="bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold text-xs uppercase hover:opacity-90 transition-smooth shadow-lg shadow-green-200 flex items-center gap-2"
           >
-            Dúvidas? Fale Conosco
+            Chamar No Whatsapp
           </a>
         </div>
       </header>
@@ -107,7 +107,7 @@ export function ComprarPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <a 
-              href={getWhatsAppLink("Quero saber mais sobre a promoção PLANO ANUAL ECONOMIA DE 40%", "COMPRA")}
+              href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
               className="group bg-red-600 p-5 rounded-2xl border-[3px] border-black shadow-lg transition-smooth hover:scale-105 hover:bg-black flex flex-col justify-center min-h-[140px]"
@@ -117,7 +117,7 @@ export function ComprarPage() {
             </a>
             
             <a 
-              href={getWhatsAppLink("Quero saber mais sobre a promoção COMPRE 1 LEVE 2", "COMPRA")}
+              href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
               className="group bg-red-600 p-5 rounded-2xl border-[3px] border-black shadow-lg transition-smooth hover:scale-105 hover:bg-black flex flex-col justify-center min-h-[140px]"
@@ -129,7 +129,7 @@ export function ComprarPage() {
             </a>
 
             <a 
-              href={getWhatsAppLink("Quero saber mais sobre a promoção DESCONTO INICIAL PRIMEIRO MÊS R$ 25,00", "COMPRA")}
+              href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
               className="group bg-red-600 p-5 rounded-2xl border-[3px] border-black shadow-lg transition-smooth hover:scale-105 hover:bg-black flex flex-col justify-center min-h-[140px]"
@@ -147,7 +147,7 @@ export function ComprarPage() {
               Conheça nosso serviço gratuitamente antes de comprar e valide nossa qualidade agora mesmo.
             </p>
             <a 
-              href={getWhatsAppLink("Olá, quero saber mais sobre o serviço antes de assinar um plano.", "COMPRA")}
+              href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
               className="inline-block bg-black text-white px-10 py-5 rounded-full font-black text-xl uppercase tracking-tighter hover:bg-slate-800 transition-smooth shadow-lg shadow-black/20"
@@ -199,7 +199,7 @@ export function ComprarPage() {
               </ul>
 
               <a
-                href={getWhatsAppLink(`Olá, tenho interesse no plano ${plan.name} no valor de ${plan.price}, quero conhecer o serviço antes de assinar.`, "COMPRA")}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
                 className={`w-full py-4 rounded-lg font-bold text-sm uppercase tracking-widest text-center transition-smooth ${plan.popular ? 'bg-brand-accent text-white shadow-xl shadow-blue-200' : 'bg-slate-900 text-white hover:bg-black'}`}

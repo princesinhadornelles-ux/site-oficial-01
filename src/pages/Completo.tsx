@@ -73,7 +73,7 @@ export function CompletoPage() {
     };
   }, []);
 
-  const whatsappUrl = getWhatsAppLink("Olá, vim pela página COMPLETA e quero aproveitar as promoções!", "COMPLETO");
+  const whatsappUrl = getWhatsAppLink("Olá, estava no seu site _*completo*_ e gostaria de conhecer melhor, posso fazer um teste?", "COMPLETO");
 
   return (
     <div className="bg-slate-50 min-h-screen text-slate-900 font-sans selection:bg-brand-accent/20">
@@ -82,6 +82,14 @@ export function CompletoPage() {
         <div className="container-sleek flex justify-between items-center w-full">
           <Logo isDark={true} />
           <div className="flex items-center gap-2 md:gap-4">
+             <a
+               href={whatsappUrl}
+               target="_blank"
+               rel="noreferrer"
+               className="bg-[#25D366] text-white px-4 py-2 rounded-lg font-bold text-xs uppercase hover:opacity-90 transition-smooth shadow-lg shadow-green-900/30 hidden sm:flex items-center gap-2"
+             >
+               Chamar No Whatsapp
+             </a>
              <span className="hidden sm:block text-[10px] md:text-xs font-bold text-white/60 uppercase tracking-widest animate-pulse">A oferta expira em:</span>
              <div className="bg-red-600 px-3 py-1 rounded text-white font-mono font-bold text-sm md:text-lg animate-flash flex items-center gap-2 border border-white/20 shadow-[0_0_15px_rgba(220,38,38,0.5)]">
                 <Clock size={16} />
@@ -115,7 +123,7 @@ export function CompletoPage() {
                 <p className="text-slate-500 font-medium leading-relaxed">
                   Ganhe 30% de DESCONTO na sua primeira mensalidade usando o cupom <span className="text-brand-accent font-black">QUERO30</span>, promoção válida somente para quem pagar o plano mensal nas proximas 2 horas. Corra e garanta sua vaga agora mesmo
                 </p>
-                <a href={getWhatsAppLink("Olá, quero usar o cupom QUERO30 para ganhar 30% de desconto na primeira mensalidade do plano mensal!", "COMPLETO")} target="_blank" rel="noreferrer" className="w-full py-4 bg-brand-primary text-white rounded-xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-all flex items-center justify-center gap-2">
+                <a href={whatsappUrl} target="_blank" rel="noreferrer" className="w-full py-4 bg-brand-primary text-white rounded-xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-all flex items-center justify-center gap-2">
                   Eu quero desconto!
                 </a>
               </motion.div>
@@ -131,7 +139,7 @@ export function CompletoPage() {
                 <p className="text-slate-500 font-medium leading-relaxed">
                   Assine qualquer plano agora e receba o <span className="text-brand-accent font-black">DOBRO</span> de tempo de acesso inteiramente grátis hoje!
                 </p>
-                <a href={getWhatsAppLink("Olá, o que prefiro é GANHAR DOBRADO! Quero o dobro de tempo de acesso grátis hoje.", "COMPLETO")} target="_blank" rel="noreferrer" className="w-full py-4 bg-brand-accent text-white rounded-xl font-bold uppercase tracking-widest hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                <a href={whatsappUrl} target="_blank" rel="noreferrer" className="w-full py-4 bg-brand-accent text-white rounded-xl font-bold uppercase tracking-widest hover:brightness-110 transition-all flex items-center justify-center gap-2">
                   Eu quero dobrar!
                 </a>
               </motion.div>
@@ -167,7 +175,7 @@ export function CompletoPage() {
                   </ul>
 
                   <a 
-                    href={getWhatsAppLink(`Olá, quero assinar o plano ${plan.name} que vi na oferta exclusiva!`, "COMPLETO")} 
+                    href={whatsappUrl} 
                     target="_blank" 
                     rel="noreferrer" 
                     className={`block w-full py-4 rounded-xl text-center font-bold text-xs uppercase tracking-widest transition-all ${plan.popular ? 'bg-brand-accent text-white shadow-lg shadow-blue-500/20' : 'bg-slate-900 text-white hover:bg-black'}`}
@@ -255,7 +263,7 @@ export function CompletoPage() {
 
       {/* Botão Flutuante WhatsApp */}
       <motion.a
-        href={getWhatsAppLink("Olá, estou na página de OFERTA COMPLETA e preciso de suporte agora!", "COMPLETO")}
+        href={whatsappUrl}
         target="_blank"
         rel="noreferrer"
         whileHover={{ scale: 1.1 }}
