@@ -93,11 +93,6 @@ export function CompletoPage() {
 
       <main className="pt-24 pb-20">
         <div className="container-sleek">
-          {/* Aviso de transparência */}
-          <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 mb-8 text-xs text-blue-800 leading-relaxed">
-            <strong>Aviso:</strong> O Filmes My View é um guia informativo independente. Não vendemos IPTV, listas de canais, login, senha, streaming próprio, download ou acesso a filmes, séries e canais. Nosso objetivo é apenas orientar usuários sobre onde encontrar conteúdos em plataformas oficiais e legais.
-          </div>
-
           {/* Hero: O que você prefere? */}
           <section id="testegratis" className="text-center mb-16 py-10">
             <motion.h1 

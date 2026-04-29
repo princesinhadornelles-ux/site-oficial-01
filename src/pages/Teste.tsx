@@ -155,9 +155,6 @@ export function TestePage() {
       </header>
 
       <div id="testegratis" className="container-sleek py-10 md:py-20">
-        <div className="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 mb-8 text-xs text-blue-800 leading-relaxed">
-          <strong>Aviso:</strong> O Filmes My View é um guia informativo independente. Não vendemos IPTV, listas de canais, login, senha, streaming próprio, download ou acesso a filmes, séries e canais. Nosso objetivo é apenas orientar usuários sobre onde encontrar conteúdos em plataformas oficiais e legais.
-        </div>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Column: Content */}
           <div className="md:col-span-7">
