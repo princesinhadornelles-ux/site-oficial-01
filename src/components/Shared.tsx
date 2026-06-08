@@ -66,7 +66,7 @@ export function Navbar() {
       {/* Spacer for fixed banner */}
       <div className="h-[60px] md:h-[68px]" />
 
-    <nav className={`h-16 flex items-center border-b shadow-sm transition-smooth ${isBlog ? 'bg-[#0a0f1c] border-[#1f2a3e]' : 'bg-white border-slate-200'}`}>
+    <nav className={`h-16 items-center border-b shadow-sm transition-smooth ${isBlog ? 'hidden md:flex bg-[#0a0f1c] border-[#1f2a3e]' : 'flex bg-white border-slate-200'}`}>
       <div className="container-sleek flex justify-between items-center w-full">
         <div className="flex items-center gap-8">
           <Logo isDark={isBlog} />
