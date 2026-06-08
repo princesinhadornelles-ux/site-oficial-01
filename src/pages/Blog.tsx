@@ -42,7 +42,7 @@ export function BlogHome() {
     <div className="bg-brand-bg min-h-screen">
 
       {/* Block 1: Hero text */}
-      <section className="bg-slate-800 border-b border-white/10 py-8 px-5 text-center">
+      <section id="testegratis" className="bg-slate-800 border-b border-white/10 py-8 px-5 text-center">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-xl md:text-2xl lg:text-3xl font-black uppercase leading-snug mb-4 text-white tracking-wide">
             VOCÊ ESTÁ NO SITE DO<br />
@@ -76,7 +76,7 @@ export function BlogHome() {
       </section>
 
       {/* Block 2: Single column — main content */}
-      <div id="testegratis" className="container-sleek py-5 md:py-8">
+      <div id="planos" className="container-sleek py-5 md:py-8">
         <h1 className="text-xl md:text-3xl lg:text-4xl font-extrabold leading-tight mb-4 text-brand-primary">
           Experimente por 4 horas ou 2 horas gratuitamente antes de assinar
         </h1>
@@ -96,7 +96,7 @@ export function BlogHome() {
       </div>
 
       {/* Block 2.5: Highlight banner */}
-      <section className="bg-slate-700 py-8 px-5 text-center">
+      <section id="valores" className="bg-slate-700 py-8 px-5 text-center">
         <div className="max-w-3xl mx-auto">
           <p className="text-white text-[clamp(0.75rem,3vw,1.25rem)] font-black uppercase tracking-wide leading-snug">
             TENHA MAIS DE 100 MIL CONTEÚDOS SEM TRAVAMENTOS COM<br />
@@ -106,7 +106,7 @@ export function BlogHome() {
       </section>
 
       {/* Block: Steps */}
-      <section className="bg-green-100 py-10 px-5">
+      <section id="comprar" className="bg-green-100 py-10 px-5">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-center text-xl md:text-2xl font-black uppercase tracking-wide text-green-900 mb-8">
             PASSOS PARA SER UM ASSINANTE!
@@ -181,7 +181,7 @@ export function BlogHome() {
       </div>
 
       {/* Block: CTA final */}
-      <section className="bg-slate-900 py-12 px-5 text-center">
+      <section id="falarcomatendente" className="bg-slate-900 py-12 px-5 text-center">
         <div className="max-w-2xl mx-auto flex flex-col items-center gap-8">
           <p className="text-white text-sm md:text-base leading-relaxed font-medium">
             Agora que já conhece um pouco mais sobre nosso trabalho, fale agora mesmo com um atendente diretamente pelo WhatsApp e peça seu teste grátis e confira nossa qualidade
