@@ -107,7 +107,7 @@ export function Footer() {
         <div className="text-[11px] leading-relaxed">
           <strong className={`${isBlog ? 'text-white' : 'text-brand-primary'} block mb-2 uppercase tracking-widest opacity-50`}>Transparência</strong>
           <p className={isBlog ? 'text-slate-500' : 'text-slate-500'}>
-            O <strong>{SITE_CONFIG.name}</strong> é um portal informativo e de prestação de serviços digitais. {SITE_CONFIG.footerDisclaimer}
+            O <strong>{SITE_CONFIG.name}</strong> é um portal informativo independente sobre entretenimento digital. {SITE_CONFIG.footerDisclaimer}
           </p>
         </div>
         <div className="text-[11px] leading-relaxed">

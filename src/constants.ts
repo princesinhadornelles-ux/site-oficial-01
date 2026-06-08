@@ -28,7 +28,7 @@ export const SITE_CONFIG = {
   cnpj: "66.387.501/0001-80",
   description: "Filmes My View - O maior portal de recomendações de filmes e séries. Conteúdo 100% legal.",
   regionTitle: "Atendimento em São José dos Campos e Região",
-  footerDisclaimer: "Este site não hospeda, transmite ou disponibiliza conteúdos audiovisuais. Apenas recomendamos plataformas oficiais.",
+  footerDisclaimer: "Este site não hospeda, transmite ou disponibiliza conteúdos audiovisuais. Apenas publicamos informações e recomendamos plataformas oficiais.",
   copyright: "© 2026 Filmes My View - Portal em conformidade com Google Ads"
 };
 
