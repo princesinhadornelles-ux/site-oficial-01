@@ -42,13 +42,13 @@ function ScrollToTop() {
 
 function AppContent() {
   const location = useLocation();
-  const isLandingPage = location.pathname === '/saibamais' || location.pathname === '/planos' || location.pathname === '/sabermais';
-  const isTestePage = location.pathname === '/saibamais';
+  const hideNavbar = location.pathname === '/saibamais' || location.pathname === '/planos' || location.pathname === '/sabermais';
+  const hideFooter = hideNavbar || location.pathname === '/' || location.pathname === '/blog' || location.pathname.startsWith('/blog');
   const isLandingWithWhatsApp = location.pathname === '/saibamais' || location.pathname === '/sabermais';
 
   return (
     <div className="flex flex-col min-h-screen">
-      {!isLandingPage && <Navbar />}
+      {!hideNavbar && <Navbar />}
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<BlogHome />} />
@@ -65,7 +65,7 @@ function AppContent() {
           <Route path="/direitos-autorais" element={<DireitosAutoraisPage />} />
         </Routes>
       </main>
-      {!isLandingPage && <Footer />}
+      {!hideFooter && <Footer />}
       {isLandingWithWhatsApp && <WhatsAppButton />}
     </div>
   );

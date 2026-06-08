@@ -29,16 +29,15 @@ const TESTIMONIALS = [
 export function TestePage() {
   const whatsappUrl = getWhatsAppLink("Olá, gostaria de fazer um _*teste*_ para conhecer o serviço, pode me ajudar?", "TESTE");
 
-  const GROUPS = Math.ceil(TESTIMONIALS.length / 3);
-  const [currentGroup, setCurrentGroup] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Rotate groups of 3 testimonials
+  // Testimonial rotation
   useEffect(() => {
     const id = setInterval(() => {
-      setCurrentGroup(prev => (prev + 1) % GROUPS);
-    }, 5000);
+      setCurrentIndex(prev => (prev + 1) % TESTIMONIALS.length);
+    }, 4000);
     return () => clearInterval(id);
-  }, [GROUPS]);
+  }, []);
 
   return (
     <div className="bg-brand-bg min-h-screen">
@@ -98,7 +97,7 @@ export function TestePage() {
             </span>
           </h2>
           <p className="text-slate-300 text-xs md:text-sm leading-relaxed mb-3">
-            Estamos no mercado a mais de 10 anos, e podemos dizer que somos o melhor, te garantimos um teste grátis de 2 horas para conferir tudo que temos para te oferecer...
+            Estamos no mercado a mais de 5 anos, e podemos dizer que somos o melhor, te garantimos um teste grátis de 1 hora para conferir tudo que temos para te oferecer...
           </p>
           <p className="text-slate-300 text-xs md:text-sm leading-relaxed">
             Fizemos este site simples e básico para você não perder tempo lendo e ja ir falar diretamente com um atendente que está a sua espera, logo abaixo tera um botão chamado{' '}
@@ -188,83 +187,44 @@ export function TestePage() {
       </section>
 
       {/* Block 3: Testimonials */}
-      <div id="suporte" className="container-sleek py-10 max-w-5xl mx-auto">
-        <h2 className="text-center text-xl md:text-2xl font-black uppercase tracking-wide text-brand-primary mb-8">
-          VEJA OS DEPOIMENTOS DE QUEM JÁ USOU
-        </h2>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentGroup}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.45 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
-            {TESTIMONIALS.slice(currentGroup * 3, currentGroup * 3 + 3).map((t, i) => (
-              <div key={i} className="card-sleek flex flex-col gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-brand-success font-bold text-sm shrink-0">
-                    {t.initials}
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-brand-primary">{t.name}</div>
-                    <div className="text-xs text-slate-400">{t.time}</div>
-                  </div>
+      <div className="container-sleek pb-16 flex flex-col gap-6 max-w-2xl mx-auto">
+
+        {/* Card: Testimonial (rotating) */}
+        <div id="suporte" className="card-sleek overflow-hidden min-h-[140px] relative">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.45 }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-brand-success font-bold text-sm shrink-0">
+                  {TESTIMONIALS[currentIndex].initials}
                 </div>
-                <p className="text-sm italic text-slate-700 leading-relaxed font-medium">
-                  "{t.msg}"
-                </p>
+                <div>
+                  <div className="text-sm font-bold text-brand-primary">{TESTIMONIALS[currentIndex].name}</div>
+                  <div className="text-xs text-slate-400">{TESTIMONIALS[currentIndex].time}</div>
+                </div>
               </div>
+              <p className="text-sm italic text-slate-700 leading-relaxed font-medium">
+                "{TESTIMONIALS[currentIndex].msg}"
+              </p>
+            </motion.div>
+          </AnimatePresence>
+          <div className="flex gap-1 mt-4">
+            {TESTIMONIALS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentIndex(i)}
+                className={`h-1 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-4 bg-brand-accent' : 'w-1 bg-slate-200'}`}
+              />
             ))}
-          </motion.div>
-        </AnimatePresence>
-        <div className="flex justify-center gap-2 mt-6">
-          {Array.from({ length: GROUPS }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentGroup(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${i === currentGroup ? 'w-6 bg-brand-accent' : 'w-2 bg-slate-300'}`}
-            />
-          ))}
+          </div>
         </div>
+
       </div>
-
-      {/* Block: CTA final */}
-      <section className="bg-slate-900 py-12 px-5 text-center">
-        <div className="max-w-2xl mx-auto flex flex-col items-center gap-8">
-          <p className="text-white text-sm md:text-base leading-relaxed font-medium">
-            Agora que já conhece um pouco mais sobre nosso trabalho, fale agora mesmo com um atendente diretamente pelo WhatsApp e peça seu teste grátis e confira nossa qualidade
-          </p>
-          <motion.a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noreferrer"
-            animate={{
-              color: ['#22c55e', '#facc15', '#ffffff', '#22c55e'],
-              textShadow: [
-                '0 0 0px #22c55e',
-                '0 0 14px #facc15, 0 0 28px #facc15',
-                '0 0 10px #ffffff',
-                '0 0 0px #22c55e',
-              ],
-              scale: [1, 1.06, 1],
-              borderColor: ['#22c55e', '#facc15', '#ffffff', '#22c55e'],
-              boxShadow: [
-                '0 0 0px #22c55e',
-                '0 0 16px #facc15',
-                '0 0 8px #ffffff',
-                '0 0 0px #22c55e',
-              ],
-            }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
-            className="inline-block border-4 rounded-2xl px-8 py-4 font-black text-lg md:text-2xl uppercase tracking-widest cursor-pointer"
-          >
-            CLIQUE AQUI PARA GERAR O TESTE !
-          </motion.a>
-        </div>
-      </section>
-
     </div>
   );
 }

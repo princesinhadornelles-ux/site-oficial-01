@@ -1,196 +1,220 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Calendar, ArrowRight, Star, Tv, ShieldCheck, Info, AlertTriangle, Users, MapPin, Search, Clock } from 'lucide-react';
-import { motion } from 'motion/react';
-import { SITE_CONFIG, getWhatsAppLink } from '@/src/constants';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { getWhatsAppLink } from '@/src/constants';
 
-/**
- * INSTRUCTIONS FOR IMAGES:
- * To change a movie's image, simply replace the URL in the 'image' property below.
- * You can use local paths (e.g., "/images/my-movie.jpg") or external URLs.
- */
-const CATEGORIES = ["Todos", "Ação", "Suspense", "Terror", "Animação", "Infantil", "Ficção", "Comédia", "Drama", "Aventura"];
-
-const MOVIE_CATALOG = [
-  { id: 1, title: "Deadpool & Wolverine", year: 2024, category: "Ação", rating: 8.9, platform: ["Disney+", "Prime Video"], image: "/images/blog/foto-1.jpg", slug: "deadpool-3" },
-  { id: 2, title: "Missão Impossível 8", year: 2025, category: "Ação", rating: 9.1, platform: ["Paramount+", "Apple TV+"], image: "/images/blog/foto-2.jpg", slug: "missao-impossivel-8" },
-  { id: 3, title: "John Wick 4", year: 2023, category: "Ação", rating: 8.9, platform: ["Netflix", "Prime Video"], image: "/images/blog/foto-3.jpg", slug: "john-wick-4" },
-  { id: 4, title: "Velozes e Furiosos 11", year: 2025, category: "Ação", rating: 8.5, platform: ["Prime Video"], image: "/images/blog/foto-4.jpg", slug: "velozes-11" },
-  { id: 5, title: "Sorria 2", year: 2024, category: "Terror", rating: 7.9, platform: ["Paramount+"], image: "/images/blog/foto-5.jpg", slug: "sorria-2" },
-  { id: 6, title: "Invocação do Mal 4", year: 2025, category: "Terror", rating: 8.1, platform: ["Max"], image: "/images/blog/foto-6.jpg", slug: "invocacao-4" },
-  { id: 7, title: "Divertida Mente 2", year: 2024, category: "Animação", rating: 8.7, platform: ["Disney+"], image: "/images/blog/foto-7.jpg", slug: "divertida-mente-2" },
-  { id: 8, title: "Mufasa: O Rei Leão", year: 2024, category: "Animação", rating: 8.4, platform: ["Disney+"], image: "/images/blog/foto-8.jpg", slug: "mufasa" },
-  { id: 9, title: "Duna: Parte 2", year: 2024, category: "Ficção", rating: 9.2, platform: ["Max", "Prime Video"], image: "/images/blog/foto-9.jpg", slug: "duna-2" },
-  { id: 10, title: "Alien: Romulus", year: 2024, category: "Ficção", rating: 8.5, platform: ["Disney+"], image: "/images/blog/foto-10.jpg", slug: "alien-romulus" },
-  { id: 11, title: "Oppenheimer", year: 2023, category: "Drama", rating: 9.0, platform: ["Prime Video"], image: "/images/blog/foto-11.jpg", slug: "oppenheimer" },
-  { id: 12, title: "The Last of Us S2", year: 2025, category: "Drama", rating: 9.4, platform: ["Max"], image: "/images/blog/foto-12.jpg", slug: "tlou-2" },
-  { id: 13, title: "Stranger Things 5", year: 2025, category: "Ficção", rating: 9.5, platform: ["Netflix"], image: "/images/blog/foto-13.jpg", slug: "stranger-things-5" },
-  { id: 14, title: "House of the Dragon S2", year: 2024, category: "Drama", rating: 9.2, platform: ["Max"], image: "/images/blog/foto-14.jpg", slug: "hotd-2" },
-  { id: 15, title: "The Boys S4", year: 2024, category: "Ação", rating: 9.3, platform: ["Prime Video"], image: "/images/blog/foto-15.jpg", slug: "the-boys-4" },
-  { id: 16, title: "Fallout", year: 2024, category: "Aventura", rating: 9.0, platform: ["Prime Video"], image: "/images/blog/foto-16.jpg", slug: "fallout-series" },
-  { id: 17, title: "Kung Fu Panda 4", year: 2024, category: "Animação", rating: 8.3, platform: ["Prime Video"], image: "/images/blog/foto-17.jpg", slug: "panda-4" },
-  { id: 18, title: "Barbie 2", year: 2025, category: "Comédia", rating: 8.0, platform: ["Max"], image: "/images/blog/foto-18.jpg", slug: "barbie-2" },
-  { id: 19, title: "Patrulha Canina", year: 2024, category: "Infantil", rating: 7.8, platform: ["Paramount+"], image: "/images/blog/foto-19.jpg", slug: "patrulha-canina" },
-  { id: 20, title: "Silêncio dos Inocentes 2", year: 2025, category: "Suspense", rating: 8.7, platform: ["Max"], image: "/images/blog/foto-20.jpg", slug: "silencio-2" },
+const TESTIMONIALS = [
+  { initials: "JD", name: "João Duarte",      time: "Cliente há 6 meses",  msg: "Fui em Saiba Mais, ganhei gratuitamente um acesso de 4 horas para conhecer o serviço. O sinal não trava e o suporte foi super atencioso na hora da instalação." },
+  { initials: "MC", name: "Mariana Costa",    time: "Cliente há 3 meses",  msg: "Achei que ia ser complicado, mas a configuração com o suporte foi em menos de 2 minutos. Orientação impecável, uso no celular, TV e notebook sem problema nenhum." },
+  { initials: "RS", name: "Rafael Souza",     time: "Cliente há 8 meses",  msg: "O suporte humano é o diferencial. Toda vez que precisei, respondem rápido e resolvem de verdade. Nunca vi isso em outro serviço do tipo." },
+  { initials: "AL", name: "Ana Luiza",        time: "Cliente há 1 ano",    msg: "Preço justo e qualidade top. Já indiquei pra toda a família. Meu marido era cético, mas depois que conheceu o serviço assinou na hora." },
+  { initials: "FP", name: "Felipe Prado",     time: "Cliente há 4 meses",  msg: "Fiquei surpreso com a estabilidade. Assisto futebol ao vivo sem travar nenhuma vez. Vale muito cada centavo do plano." },
+  { initials: "CB", name: "Carla Braga",      time: "Cliente há 2 meses",  msg: "Tentei outros serviços antes e era decepção atrás de decepção. Aqui é diferente. O sinal é limpo e o atendimento é humano de verdade." },
+  { initials: "TM", name: "Thiago Mendes",    time: "Cliente há 7 meses",  msg: "Assino o plano anual e economizei muito comparado ao que pagava antes. A qualidade em 4K é absurda, nunca pixeliza." },
+  { initials: "LF", name: "Luciana Ferreira", time: "Cliente há 5 meses",  msg: "Minha internet não é das melhores e mesmo assim o serviço roda perfeito. Eles otimizaram muito bem. Recomendo sem hesitar." },
+  { initials: "GN", name: "Gustavo Nunes",    time: "Cliente há 9 meses",  msg: "Atendimento no WhatsApp é rápido demais. Tive um problema numa sexta à noite e me responderam em menos de 3 minutos. Surpreendente!" },
+  { initials: "PR", name: "Priscila Reis",    time: "Cliente há 6 meses",  msg: "Uso na Smart TV e no Fire Stick sem nenhuma dificuldade. A interface é fácil e intuitiva. Minha mãe consegue usar sozinha sem me chamar." },
+  { initials: "BE", name: "Bruno Esteves",    time: "Cliente há 1 ano",    msg: "Paguei o plano Compre 1 Leve 2 e foi a melhor decisão. Duas contas pelo preço de uma, minha esposa também usa e nunca tivemos conflito de sinal." },
+  { initials: "JO", name: "Juliana Oliveira", time: "Cliente há 3 meses",  msg: "O que me convenceu foi conhecer o serviço antes de pagar. Pude ver a qualidade com os meus próprios olhos. Confiança total desde o primeiro momento." },
+  { initials: "DV", name: "Diego Vasconcelos",time: "Cliente há 11 meses", msg: "Sou exigente com qualidade de imagem e esse serviço atende perfeitamente. HD e 4K sem travamento, mesmo nos horários de pico." },
+  { initials: "NM", name: "Natália Moura",    time: "Cliente há 4 meses",  msg: "Vim pelo preço e fiquei pela qualidade. O primeiro mês com desconto me deu a oportunidade de ver que vale muito mais do que cobram." },
+  { initials: "RB", name: "Ricardo Barbosa",  time: "Cliente há 8 meses",  msg: "Transparência total. O que prometem na página é exatamente o que entregam. Isso é raro hoje em dia. Nunca fui enganado." },
+  { initials: "SM", name: "Sabrina Melo",     time: "Cliente há 2 meses",  msg: "Configuração simples com o suporte e atendimento sempre disponível. Tudo que eu precisava num serviço de orientação digital. Nota dez sem exagero." },
+  { initials: "ED", name: "Eduardo Dias",     time: "Cliente há 6 meses",  msg: "Uso principalmente para séries e filmes em 4K. A qualidade é incrível e nunca perdi uma cena por buffering. Totalmente recomendado." },
+  { initials: "VP", name: "Vinicius Pereira", time: "Cliente há 5 meses",  msg: "O custo-benefício é imbatível. Pago menos da metade do que pagava antes e tenho uma qualidade muito superior. Não tem pra onde correr." },
+  { initials: "LC", name: "Larissa Campos",   time: "Cliente há 7 meses",  msg: "Gostei demais da atenção no atendimento. Fizeram questão de me explicar tudo antes de eu assinar. Senti segurança desde a primeira mensagem." },
+  { initials: "AM", name: "Alexandre Martins",time: "Cliente há 10 meses", msg: "Indiquei para 6 amigos e todos continuam assinantes até hoje. Quando um serviço é bom de verdade, a indicação é natural. Qualidade garantida." },
 ];
 
 export function BlogHome() {
-  const [activeCategory, setActiveCategory] = React.useState("Todos");
-  const [search, setSearch] = React.useState("");
-  
-  const filteredMovies = MOVIE_CATALOG.filter(movie => {
-    const matchesCat = activeCategory === "Todos" || movie.category === activeCategory;
-    const matchesSearch = movie.title.toLowerCase().includes(search.toLowerCase());
-    return matchesCat && matchesSearch;
-  });
+  const whatsappUrl = getWhatsAppLink("Olá, gostaria de fazer um _*teste*_ para conhecer o serviço, pode me ajudar?", "HOME");
+
+  const GROUPS = Math.ceil(TESTIMONIALS.length / 3);
+  const [currentGroup, setCurrentGroup] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setCurrentGroup(prev => (prev + 1) % GROUPS);
+    }, 5000);
+    return () => clearInterval(id);
+  }, [GROUPS]);
 
   return (
-    <div className="bg-[#0a0f1c] min-h-screen text-[#e2e8f0]">
-      {/* Disclaimer Top Bar */}
-      <div className="bg-[#1a1f2e] text-brand-warning py-3 text-center text-[10px] md:text-xs font-bold px-4 border-b border-[#2a2f3e] flex items-center justify-center gap-2">
-        <AlertTriangle size={14} />
-        Este site não hospeda, transmite ou disponibiliza conteúdos audiovisuais. Apenas recomendamos plataformas oficiais.
+    <div className="bg-brand-bg min-h-screen">
+
+      {/* Block 1: Hero text */}
+      <section className="bg-slate-800 border-b border-white/10 py-8 px-5 text-center">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-black uppercase leading-snug mb-4 text-white tracking-wide">
+            VOCÊ ESTÁ NO SITE DO<br />
+            <span className="whitespace-nowrap">
+              <span className="text-brand-accent">MELHOR IPTV E P2P</span>{' '}DO BRASIL !
+            </span>
+          </h2>
+          <p className="text-slate-300 text-xs md:text-sm leading-relaxed mb-3">
+            Estamos no mercado a mais de 10 anos, e podemos dizer que somos o melhor, te garantimos um teste grátis de 2 horas para conferir tudo que temos para te oferecer...
+          </p>
+          <p className="text-slate-300 text-xs md:text-sm leading-relaxed">
+            Fizemos este site simples e básico para você não perder tempo lendo e ja ir falar diretamente com um atendente que está a sua espera, logo abaixo tera um botão chamado{' '}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="font-bold text-brand-accent underline hover:text-white transition-colors"
+            >
+              "CLIQUE AQUI PARA GERAR O TESTE !"
+            </a>, clique e seja direcionado a um especialista pronto para te atender via WhatsApp.
+          </p>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block mt-5 bg-[#25D366] text-white font-black text-sm md:text-base uppercase tracking-wide px-8 py-3 rounded-xl shadow-lg shadow-green-900/40 hover:brightness-110 transition-all"
+          >
+            Gerar Teste Gratuito No Whatsapp
+          </a>
+        </div>
+      </section>
+
+      {/* Block 2: Single column — main content */}
+      <div id="testegratis" className="container-sleek py-5 md:py-8">
+        <h1 className="text-xl md:text-3xl lg:text-4xl font-extrabold leading-tight mb-4 text-brand-primary">
+          Experimente por 4 horas ou 2 horas gratuitamente antes de assinar
+        </h1>
+        <p className="text-sm md:text-base text-slate-600 mb-8 leading-relaxed font-medium max-w-2xl">
+          Conheça a qualidade do nosso trabalho sem compromisso. Teste gratuitamente um plano completo por 4 ou 2 horas para você validar que o nosso servidor é realmente o que você está procurando
+        </p>
+        <div className="flex flex-col gap-6">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-sleek-primary w-fit text-center"
+          >
+            Solicitar Teste Grátis Agora
+          </a>
+        </div>
       </div>
 
-      <div className="container-sleek py-10 md:py-16">
-        {/* Blog Hero Section */}
-        <section className="bg-gradient-to-br from-[#0f172a] to-[#0a0f1c] rounded-[2rem] border border-[#1f2a3e] p-8 md:p-16 mb-12 relative overflow-hidden">
-          <div className="relative z-10">
-            <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tighter">
-              Filmes My View
-            </h1>
-            <p className="text-slate-400 text-lg md:text-xl font-medium max-w-2xl mb-8">
-              O maior catálogo de recomendações de filmes e séries. Descubra onde assistir de forma 100% legal e segura.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-              <Link to="/contato" className="bg-[#E50914] text-white px-8 py-3 rounded-full font-bold text-sm tracking-widest hover:brightness-110 transition-smooth">
-                📞 FALE COM ATENDIMENTO
-              </Link>
-              
-              {/* Search Bar */}
-              <div className="bg-[#1e293b] rounded-full px-6 py-2 flex items-center gap-3 w-full sm:w-auto min-w-[280px]">
-                <Search size={18} className="text-slate-500" />
-                <input 
-                  type="text" 
-                  placeholder="Buscar filme ou série..." 
-                  className="bg-transparent outline-none flex-1 py-1 italic text-sm"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+      {/* Block 2.5: Highlight banner */}
+      <section className="bg-slate-700 py-8 px-5 text-center">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-white text-[clamp(0.75rem,3vw,1.25rem)] font-black uppercase tracking-wide leading-snug">
+            TENHA MAIS DE 100 MIL CONTEÚDOS SEM TRAVAMENTOS COM<br />
+            <span className="text-brand-accent whitespace-nowrap">QUALIDADE DE IMAGENS INIGUALÁVEL</span>
+          </p>
+        </div>
+      </section>
 
-        {/* Categories Grid */}
-        <div className="mb-8 overflow-x-auto no-scrollbar">
-          <div className="flex gap-3 pb-4">
-            {CATEGORIES.map((cat) => (
-              <button 
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-smooth border ${
-                  activeCategory === cat 
-                    ? 'bg-[#E50914] text-white border-[#E50914] shadow-lg shadow-red-900/20' 
-                    : 'bg-[#1e293b] text-slate-400 border-transparent hover:border-brand-warning hover:text-brand-warning'
-                }`}
-              >
-                {cat}
-              </button>
+      {/* Block: Steps */}
+      <section className="bg-green-100 py-10 px-5">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-center text-xl md:text-2xl font-black uppercase tracking-wide text-green-900 mb-8">
+            PASSOS PARA SER UM ASSINANTE!
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="bg-white rounded-2xl p-6 shadow-md flex flex-col items-center text-center gap-3 hover:shadow-lg hover:scale-[1.02] transition-all">
+              <div className="w-10 h-10 rounded-full bg-green-500 text-white font-black text-lg flex items-center justify-center">1</div>
+              <h3 className="font-black uppercase text-green-800 text-sm tracking-wide">TESTE GRÁTIS</h3>
+              <p className="text-slate-600 text-xs leading-relaxed">
+                Solicite seu teste gratuito sem compromisso com um atendente pelo nosso atendimento. Nosso teste tem duração de 1 hora.
+              </p>
+            </a>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="bg-white rounded-2xl p-6 shadow-md flex flex-col items-center text-center gap-3 hover:shadow-lg hover:scale-[1.02] transition-all">
+              <div className="w-10 h-10 rounded-full bg-green-500 text-white font-black text-lg flex items-center justify-center">2</div>
+              <h3 className="font-black uppercase text-green-800 text-sm tracking-wide">ASSINE CONOSCO</h3>
+              <p className="text-slate-600 text-xs leading-relaxed">
+                Gostou né? Agora que você já fez seu teste e já tem um cadastro, é só fazer seu pagamento solicitando para o atendente as formas disponíveis para pagamento.
+              </p>
+            </a>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="bg-white rounded-2xl p-6 shadow-md flex flex-col items-center text-center gap-3 hover:shadow-lg hover:scale-[1.02] transition-all">
+              <div className="w-10 h-10 rounded-full bg-green-500 text-white font-black text-lg flex items-center justify-center">3</div>
+              <h3 className="font-black uppercase text-green-800 text-sm tracking-wide">BOM ENTRETENIMENTO</h3>
+              <p className="text-slate-600 text-xs leading-relaxed">
+                Prontinho! Agora é só você chamar a família, sentar no sofá, fazer uma pipoca, e curtir muito!
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Block 3: Testimonials */}
+      <div id="suporte" className="container-sleek py-10 max-w-5xl mx-auto">
+        <h2 className="text-center text-xl md:text-2xl font-black uppercase tracking-wide text-brand-primary mb-8">
+          VEJA OS DEPOIMENTOS DE QUEM JÁ USOU
+        </h2>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentGroup}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.45 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {TESTIMONIALS.slice(currentGroup * 3, currentGroup * 3 + 3).map((t, i) => (
+              <div key={i} className="card-sleek flex flex-col gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-brand-success font-bold text-sm shrink-0">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-brand-primary">{t.name}</div>
+                    <div className="text-xs text-slate-400">{t.time}</div>
+                  </div>
+                </div>
+                <p className="text-sm italic text-slate-700 leading-relaxed font-medium">
+                  "{t.msg}"
+                </p>
+              </div>
             ))}
-          </div>
-        </div>
-
-        {/* Section Title */}
-        <div className="flex items-center justify-between mb-8 border-l-4 border-[#E50914] pl-4">
-          <h2 className="text-xl md:text-2xl font-black">FILMES E SÉRIES EM DESTAQUE</h2>
-          <span className="text-xs font-bold text-slate-500">Mostrando {filteredMovies.length} títulos</span>
-        </div>
-
-        {/* Movie Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-20">
-          {filteredMovies.map((movie) => (
-            <motion.div
-              layout
-              key={movie.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="group bg-[#111827] rounded-2xl overflow-hidden border border-[#1f2a3e] hover:border-[#E50914] hover:-translate-y-2 transition-smooth shadow-lg cursor-pointer"
-            >
-              <div className="aspect-[2/3] relative overflow-hidden">
-                <img src={movie.image} alt={movie.title} className="object-cover w-full h-full group-hover:scale-105 transition-all duration-700" referrerPolicy="no-referrer" />
-                <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded-full flex items-center gap-1 text-[10px] font-black text-brand-warning">
-                  <Star size={10} fill="#fbbf24" stroke="#fbbf24" />
-                  {movie.rating}
-                </div>
-              </div>
-              <div className="p-4">
-                <div className="flex gap-2 text-[8px] font-black text-slate-500 mb-1 uppercase tracking-widest leading-none">
-                   <span>{movie.year}</span>
-                   <span>•</span>
-                   <span>{movie.category}</span>
-                </div>
-                <h3 className="font-bold text-sm mb-3 group-hover:text-brand-warning transition-smooth line-clamp-1">{movie.title}</h3>
-                <Link to={`/blog/${movie.id}`} className="block w-full border border-[#E50914] text-[#E50914] text-[9px] font-black uppercase tracking-widest py-2 rounded-full text-center hover:bg-[#E50914] hover:text-white transition-smooth">
-                   Saiba Mais
-                </Link>
-              </div>
-            </motion.div>
+          </motion.div>
+        </AnimatePresence>
+        <div className="flex justify-center gap-2 mt-6">
+          {Array.from({ length: GROUPS }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentGroup(i)}
+              className={`h-2 rounded-full transition-all duration-300 ${i === currentGroup ? 'w-6 bg-brand-accent' : 'w-2 bg-slate-300'}`}
+            />
           ))}
         </div>
+      </div>
 
-        {/* Where to Watch Box */}
-        <section className="bg-[#111827] border border-[#1f2a3e] rounded-[2.5rem] p-10 md:p-16 text-center mb-20">
-           <Tv size={48} className="text-[#E50914] mx-auto mb-6" />
-           <h2 className="text-2xl md:text-3xl font-black mb-6">Onde assistir legalmente?</h2>
-           <div className="max-w-3xl mx-auto">
-              <Link 
-                to="/contato"
-                className="block bg-[#1e293b] border-2 border-dashed border-[#E50914] p-8 rounded-3xl hover:bg-white/5 transition-smooth group"
-              >
-                <p className="text-slate-300 font-bold group-hover:text-[#E50914] leading-relaxed">
-                  Para saber mais, clique aqui e fale com um atendente, que te indicamos exatamente onde assistir o filme ou seriado que você deseja
-                </p>
-              </Link>
-           </div>
-        </section>
-
-        {/* Institutional Sections */}
-        <div id="sobre" className="space-y-20 mb-20">
-          <section>
-             <h2 className="text-2xl font-black mb-8 border-l-4 border-[#E50914] pl-4 uppercase">Sobre o Filmes My View</h2>
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="info-card-dark"><MapPin className="text-[#E50914] mb-4" /> <h3 className="font-bold mb-2">Quem Somos</h3> <p className="text-xs text-slate-500 leading-relaxed font-normal">Empresa brasileira com sede em São José dos Campos - SP, especializada em orientação digital e entretenimento legal.</p></div>
-                <div className="info-card-dark"><ShieldCheck className="text-[#E50914] mb-4" /> <h3 className="font-bold mb-2">Nosso Objetivo</h3> <p className="text-xs text-slate-500 leading-relaxed font-normal">Ajudar pessoas a descobrirem filmes e séries disponíveis em plataformas oficiais da melhor forma possível.</p></div>
-                <div className="info-card-dark"><Users className="text-[#E50914] mb-4" /> <h3 className="font-bold mb-2">Público</h3> <p className="text-xs text-slate-500 leading-relaxed font-normal">Atendimento personalizado para clientes residenciais e empresas que buscam o melhor do cinema digital.</p></div>
-             </div>
-          </section>
-
-          <section>
-             <h2 className="text-2xl font-black mb-8 border-l-4 border-[#E50914] pl-4 uppercase text-right md:text-left">Benefícios do Nosso Serviço</h2>
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="info-card-dark border-dashed"><Clock className="text-[#E50914] mb-4" /> <h3 className="font-bold mb-2">Atendimento Rápido</h3> <p className="text-xs text-slate-500">Resposta em até 24 horas úteis para qualquer dúvida técnica.</p></div>
-                <div className="info-card-dark border-dashed"><ShieldCheck className="text-[#E50914] mb-4" /> <h3 className="font-bold mb-2">Conteúdo 100% Legal</h3> <p className="text-xs text-slate-500">Recomendações apenas de plataformas oficiais para sua segurança.</p></div>
-                <div className="info-card-dark border-dashed"><Users className="text-[#E50914] mb-4" /> <h3 className="font-bold mb-2">Foco no Cliente</h3> <p className="text-xs text-slate-500">Suporte humanizado e próximo para garantir a melhor configuração.</p></div>
-             </div>
-          </section>
-
-          {/* Location Specific Info */}
-          <div className="bg-[#111827] border border-[#1f2a3e] rounded-3xl p-10 text-center">
-             <MapPin size={40} className="text-[#E50914] mx-auto mb-4" />
-             <h3 className="text-xl font-bold mb-2 uppercase tracking-tighter">{SITE_CONFIG.regionTitle}</h3>
-             <p className="text-sm text-slate-500 mb-4 max-w-lg mx-auto">Estamos localizados estrategicamente para atender você com agilidade e proximidade.</p>
-             <div className="text-xs font-bold text-[#E50914]">
-                {SITE_CONFIG.address}
-             </div>
-          </div>
+      {/* Block: CTA final */}
+      <section className="bg-slate-900 py-12 px-5 text-center">
+        <div className="max-w-2xl mx-auto flex flex-col items-center gap-8">
+          <p className="text-white text-sm md:text-base leading-relaxed font-medium">
+            Agora que já conhece um pouco mais sobre nosso trabalho, fale agora mesmo com um atendente diretamente pelo WhatsApp e peça seu teste grátis e confira nossa qualidade
+          </p>
+          <motion.a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            animate={{
+              color: ['#22c55e', '#facc15', '#ffffff', '#22c55e'],
+              textShadow: [
+                '0 0 0px #22c55e',
+                '0 0 14px #facc15, 0 0 28px #facc15',
+                '0 0 10px #ffffff',
+                '0 0 0px #22c55e',
+              ],
+              scale: [1, 1.06, 1],
+              borderColor: ['#22c55e', '#facc15', '#ffffff', '#22c55e'],
+              boxShadow: [
+                '0 0 0px #22c55e',
+                '0 0 16px #facc15',
+                '0 0 8px #ffffff',
+                '0 0 0px #22c55e',
+              ],
+            }}
+            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+            className="inline-block border-4 rounded-2xl px-8 py-4 font-black text-lg md:text-2xl uppercase tracking-widest cursor-pointer"
+          >
+            CLIQUE AQUI PARA GERAR O TESTE !
+          </motion.a>
         </div>
-      </div>
+      </section>
 
-      {/* Footer Branding for Blog Page */}
-      <div className="bg-[#070b14] py-8 text-center text-[10px] text-slate-600 uppercase font-bold tracking-[0.2em] border-t border-[#1f2a3e]">
-         {SITE_CONFIG.copyright}
-      </div>
     </div>
   );
 }

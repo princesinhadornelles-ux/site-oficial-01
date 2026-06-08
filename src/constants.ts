@@ -18,18 +18,27 @@ export const WHATSAPP_POOLS = {
     "5561994224422", // Número 1
     "5561974034449", // Número 2
     "5561991472166", // Número 3
+  ],
+  HOME: [
+    "5519988792084", // Número 1 — substitua pelo número desejado
+    "5519987508959", // Número 2 — substitua pelo número desejado
+    "5518988741698", // Número 3 — substitua pelo número desejado
+    "5519983320717", // Número 4 — substitua pelo número desejado
+    "5519984361036", // Número 5 — substitua pelo número desejado
+    "5519988932787", // Número 6 — substitua pelo número desejado
+    "5519988582346", // Número 7 — substitua pelo número desejado
   ]
 };
 
 export const SITE_CONFIG = {
-  name: "66.387.501 NATALIA SILVA DORNELLES",
-  email: "princesinhadornelles@gmail.com",
-  address: "QUADRA 32, 18, COND CONDOMINIO CENTRO OESTE IV AGUAS LINDAS DE GOIAS – GO, CEP: 72914-218",
-  cnpj: "66.387.501/0001-80",
-  description: "Filmes My View - O maior portal de recomendações de filmes e séries. Conteúdo 100% legal.",
-  regionTitle: "Atendimento em São José dos Campos e Região",
-  footerDisclaimer: "Este site não hospeda, transmite ou disponibiliza conteúdos audiovisuais. Apenas publicamos informações e recomendamos plataformas oficiais.",
-  copyright: "© 2026 Filmes My View - Portal em conformidade com Google Ads"
+  name: "Melhor Site Para Comprar IPTV",
+  email: "faleconosco@gmail.com",
+  address: "Localizado na Web",
+  cnpj: "***.***.***/****-**",
+  description: "Filmes My View - O maior portal de compra de IPTV e P2P",
+  regionTitle: "Atendimento 100% ONLINE",
+  footerDisclaimer: "Venha Conferir com um teste Gratuito de 2 horas",
+  copyright: "© 2026 Filmes My View - Melhor No Rank em 2026"
 };
 
 export type PoolType = keyof typeof WHATSAPP_POOLS;
@@ -50,7 +59,7 @@ export function getActiveWhatsApp(pool: PoolType = "TESTE"): string {
 }
 
 export function getWhatsAppLink(
-  message: string = "Olá, gostaria de saber mais sobre o guia Filmes My View.",
+  message: string = "Olá, gostaria de um teste gratuito.",
   pool: PoolType = "TESTE"
 ): string {
   const number = getActiveWhatsApp(pool);

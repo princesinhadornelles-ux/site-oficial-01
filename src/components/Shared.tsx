@@ -10,20 +10,63 @@ export { Logo } from './Logo';
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
+  const isBlog = location.pathname === '/' || location.pathname.startsWith('/blog');
+  const whatsappUrl = getWhatsAppLink("Olá, gostaria de fazer um _*teste*_ para conhecer o serviço, pode me ajudar?", isBlog ? "HOME" : "TESTE");
 
   const navLinks = [
-    { name: 'Saiba Mais', path: '/saibamais' },
+    { name: 'Teste Grátis', path: '/saibamais' },
     { name: 'Planos', path: '/planos' },
     { name: 'Adquirir', path: '/sabermais' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Sobre', path: '/sobre' },
-    { name: 'Contato', path: '/contato' },
   ];
 
-  const isBlog = location.pathname === '/' || location.pathname.startsWith('/blog');
-
   return (
-    <nav className={`h-16 flex items-center border-b shadow-sm sticky top-0 z-50 transition-smooth ${isBlog ? 'bg-[#0a0f1c] border-[#1f2a3e]' : 'bg-white border-slate-200'}`}>
+    <div>
+      {/* Fixed animated banner */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 z-50 border-b-2 border-brand-accent overflow-hidden"
+        animate={{ backgroundColor: ['#0f172a', '#064e3b', '#0f172a', '#1e1b4b', '#0f172a'] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          animate={{ boxShadow: ['0 0 0px #22c55e', '0 0 18px #22c55e', '0 0 0px #22c55e'] }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="relative flex flex-col items-center justify-center py-2 px-4 text-center"
+        >
+          <motion.span
+            className="text-[10px] md:text-xs font-semibold uppercase tracking-wider leading-tight"
+            animate={{ color: ['#cbd5e1', '#ffffff', '#fde68a', '#cbd5e1'] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            VOCÊ QUE PROCURA PREÇO BAIXO E QUALIDADE:
+          </motion.span>
+          <motion.span
+            className="text-base md:text-xl font-black uppercase tracking-widest leading-tight"
+            animate={{
+              color: ['#22c55e', '#facc15', '#ffffff', '#22c55e'],
+              textShadow: [
+                '0 0 0px #22c55e',
+                '0 0 12px #facc15, 0 0 24px #facc15',
+                '0 0 8px #ffffff',
+                '0 0 0px #22c55e',
+              ],
+              scale: [1, 1.05, 1],
+            }}
+            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            CLIQUE E TESTE GRÁTIS!
+          </motion.span>
+        </a>
+      </motion.div>
+      {/* Spacer for fixed banner */}
+      <div className="h-[60px] md:h-[68px]" />
+
+    <nav className={`h-16 flex items-center border-b shadow-sm transition-smooth ${isBlog ? 'bg-[#0a0f1c] border-[#1f2a3e]' : 'bg-white border-slate-200'}`}>
       <div className="container-sleek flex justify-between items-center w-full">
         <div className="flex items-center gap-8">
           <Logo isDark={isBlog} />
@@ -94,6 +137,7 @@ export function Navbar() {
         )}
       </AnimatePresence>
     </nav>
+    </div>
   );
 }
 
