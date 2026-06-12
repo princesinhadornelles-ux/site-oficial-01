@@ -22,7 +22,7 @@ export const WHATSAPP_POOLS = {
   HOME: [
     "5519988792084", // Número 1 — substitua pelo número desejado
     "5519987508959", // Número 2 — substitua pelo número desejado
-    "5518988741698", // Número 3 — substitua pelo número desejado
+    "5519988741698", // Número 3 — substitua pelo número desejado
     "5519983320717", // Número 4 — substitua pelo número desejado
     "5519984361036", // Número 5 — substitua pelo número desejado
     "5519988932787", // Número 6 — substitua pelo número desejado
