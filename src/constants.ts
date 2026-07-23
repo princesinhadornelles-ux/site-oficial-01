@@ -8,25 +8,36 @@ export const WHATSAPP_POOLS = {
     "5521979269275", // Número 2
     "5519987741165", // Número 3
     "5563981031760", // Número 4
+    "5519988582346", // Número 5
+    "5519988932787", // Número 6
+    "5519984361036", // Número 7
   ],
   COMPRA: [
-    "5561999084480", // Número 1
-    "5561991692866", // Número 2
-    "5561991094615", // Número 3
+    "5521979358021", // Número 1
+    "5521979269275", // Número 2
+    "5519987741165", // Número 3
+    "5563981031760", // Número 4
+    "5519988582346", // Número 5
+    "5519988932787", // Número 6
+    "5519984361036", // Número 7
   ],
   COMPLETO: [
-    "5561994224422", // Número 1
-    "5561974034449", // Número 2
-    "5561991472166", // Número 3
+    "5521979358021", // Número 1
+    "5521979269275", // Número 2
+    "5519987741165", // Número 3
+    "5563981031760", // Número 4
+    "5519988582346", // Número 5
+    "5519988932787", // Número 6
+    "5519984361036", // Número 7
   ],
   HOME: [
-    "5519988792084", // Número 1 — substitua pelo número desejado
-    "5519987508959", // Número 2 — substitua pelo número desejado
-    "5519988741698", // Número 3 — substitua pelo número desejado
-    "5518981550717", // Número 4 — substitua pelo número desejado
-    "5519984361036", // Número 5 — substitua pelo número desejado
-    "5519988932787", // Número 6 — substitua pelo número desejado
-    "5519988582346", // Número 7 — substitua pelo número desejado
+    "5521979358021", // Número 1
+    "5521979269275", // Número 2
+    "5519987741165", // Número 3
+    "5563981031760", // Número 4
+    "5519988582346", // Número 5
+    "5519988932787", // Número 6
+    "5519984361036", // Número 7
   ]
 };
 
