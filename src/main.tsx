@@ -1,3 +1,5 @@
+// GestAuto: precisa ser o primeiro import (captura a URL de chegada antes do React).
+import './gestauto/mkt';
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
