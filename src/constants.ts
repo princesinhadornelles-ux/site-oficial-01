@@ -53,6 +53,29 @@ export const WHATSAPP_POOLS = {
   ]
 };
 
+/**
+ * Modal de pré-atendimento exibido ao clicar em qualquer botão de WhatsApp.
+ * - ativo: false => nenhum modal; os botões funcionam como antes.
+ * - modelo: 1 => nome + telefone | 2 => somente telefone (no modelo 2, nomeObrigatorio não tem efeito).
+ * - nomeObrigatorio / telefoneObrigatorio: true = obrigatório | false = opcional.
+ * O nome nunca sai do navegador. O telefone só é enviado ao GestAuto quando preenchido e válido.
+ */
+export const WHATSAPP_MODAL_CONFIG = {
+  ativo: true,
+  modelo: 2 as 1 | 2,
+  nomeObrigatorio: false,
+  telefoneObrigatorio: false,
+  titulo: "PARABÉNS..",
+  subtitulo: "Obrigado por nos escolher",
+  rotuloNome: "Seu nome",
+  placeholderNome: "Digite seu nome",
+  rotuloTelefone: "Seu WhatsApp",
+  placeholderTelefone: "(DDD) 99999-9999",
+  textoBotao: "Falar No Whatsapp - Gerar Teste",
+  textoContinuarSemPreencher: "QUERO CONTINUAR SEM PREENCHER",
+  textoFinalidade: "Usamos seu WhatsApp somente para identificar e agilizar o seu atendimento.",
+};
+
 export const SITE_CONFIG = {
   name: "Melhor Site Para Comprar IPTV",
   email: "faleconosco@gmail.com",
