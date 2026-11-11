@@ -1,301 +1,298 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Check, Star, ShieldCheck, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Check } from 'lucide-react';
 import { getWhatsAppLink } from '@/src/constants';
-import { Countdown, Logo } from '@/src/components/Shared';
+import { Logo } from '@/src/components/Shared';
 
-const TESTIMONIALS = [
-  { name: "Ricardo Almeida",    message: "Gente, o suporte é fora de série! Me ajudaram em menos de 2 minutos. E a qualidade? Impecável, não trava nada mesmo no 4K.", date: "Hoje" },
-  { name: "Fernanda Costa",     message: "Paguei o plano trimestral e valeu cada centavo. Muito mais barato que a concorrência e entrega o dobro de estabilidade.", date: "Hoje" },
-  { name: "Bruno Souza",        message: "Fui em Saiba Mais e ganhei um acesso de 4 horas para conhecer o serviço. Mudei de canal mil vezes e não deu um delay sequer.", date: "Ontem" },
-  { name: "Luciana M.",         message: "Finalmente um serviço que presta no Brasil. O preço é justo e o sinal é limpo. Recomendo pra toda a família.", date: "Ontem" },
-  { name: "Gustavo Henrique",   message: "Impressionado com a rapidez do atendimento. Entrei em contato e em menos de 1 minuto já recebi todas as orientações. Praticidade total.", date: "Ontem" },
-  { name: "Sílvia Helena",      message: "O melhor suporte que já usei. Tive uma dúvida na TV e me mandaram até vídeo explicando. Nota mil!", date: "2 dias atrás" },
-  { name: "Tiago Oliveira",     message: "Custo benefício imbatível. Já conheci vários serviços, mas esse aqui não tem comparação, é o mais estável de todos.", date: "2 dias atrás" },
-  { name: "Mariana Dias",       message: "Uso faz 6 meses e nunca tive problema. Quando tem atualização eles avisam antes, transparência total.", date: "3 dias atrás" },
-  { name: "André Santos",       message: "Pode confiar, o serviço é top. A tecnologia deles é muito rápida, troca de canal instantânea.", date: "3 dias atrás" },
-  { name: "Patrícia Lima",      message: "Estava receosa, fui conhecer o serviço e assinei o anual na hora. Economizei muito e o serviço é premium.", date: "4 dias atrás" },
-  { name: "Roberto F.",         message: "Atendimento humano e rápido. Nada de robôs chatos. Resolveram meu problema na hora. Show!", date: "4 dias atrás" },
-  { name: "Jéssica Nunes",      message: "O sinal é perfeito, moro no interior e aqui pega tudo liso sem precisar de internet de fibra.", date: "5 dias atrás" },
-  { name: "Eduardo Vaz",        message: "Não trava no futebol! Pra mim isso era o mais importante e superou todas as minhas expectativas.", date: "5 dias atrás" },
-  { name: "Camila Rocha",       message: "Interface rápida e intuitiva. Minha mãe de 70 anos usa sozinha sem dificuldade nenhuma.", date: "Ontem" },
-  { name: "Felipe Melo",        message: "Melhor investimento que fiz esse ano. Toda a família usa e a qualidade não cai nunca.", date: "Hoje" },
-  { name: "Aline Carvalho",     message: "Sinceramente não esperava tanta qualidade pelo preço cobrado. Estou muito satisfeita com a escolha.", date: "Hoje" },
-  { name: "Rodrigo Pinto",      message: "Suporte respondeu minha dúvida em 90 segundos no WhatsApp. Isso não tem preço. Serviço nota 10.", date: "Ontem" },
-  { name: "Isabela Fonseca",    message: "Uso no celular, tablet e TV ao mesmo tempo e não cai a qualidade em nenhum. Fantástico!", date: "2 dias atrás" },
-  { name: "Marcelo Teixeira",   message: "Já indiquei para 4 amigos. Todos continuam usando. Quando o serviço é bom a indicação vem natural.", date: "2 dias atrás" },
-  { name: "Vanessa Lopes",      message: "Configuração concluída em menos de 5 minutos com a ajuda do suporte. Nunca vi isso antes. Equipe muito organizada.", date: "3 dias atrás" },
-  { name: "Diego Azevedo",      message: "Assino há 1 ano e nunca precisei reclamar. Zero problemas, zero travamentos. Isso diz tudo.", date: "3 dias atrás" },
-  { name: "Tatiane Borges",     message: "O plano anual valia demais, economizei quase R$170 em relação ao mensal. Sem arrependimento.", date: "4 dias atrás" },
-  { name: "Henrique Moraes",    message: "Suporte via WhatsApp é humano de verdade. Me atenderam num sábado à noite sem demora nenhuma.", date: "4 dias atrás" },
-  { name: "Natália Cunha",      message: "Imagem em 4K impecável. Assisto séries e filmes sem perder uma cena por buffering. Recomendo!", date: "5 dias atrás" },
-  { name: "Leandro Barbosa",    message: "Transparência total desde o primeiro contato. O que prometem é exatamente o que entregam.", date: "5 dias atrás" },
-  { name: "Priscila Andrade",   message: "Estava pagando muito mais caro em outro lugar com qualidade inferior. Arrependimento de não ter mudado antes.", date: "6 dias atrás" },
-  { name: "Carlos Mendonça",    message: "Funciona perfeitamente na minha Smart TV LG. Instalação simples e sem dor de cabeça nenhuma.", date: "6 dias atrás" },
-  { name: "Juliana Freitas",    message: "Meu marido que é bem exigente com tecnologia aprovou na hora. Qualidade de imagem absurda.", date: "1 semana" },
-  { name: "Fábio Nascimento",   message: "Pago o plano Compre 1 Leve 2 com meu irmão. Saiu pela metade do preço pra cada um. Excelente!", date: "1 semana" },
-  { name: "Renata Vieira",      message: "O desconto do primeiro mês me deu segurança para experimentar. Depois assinei o anual sem hesitar.", date: "1 semana" },
-  { name: "Paulo Drummond",     message: "Uso principalmente para assistir futebol ao vivo. Nunca travou em nenhum jogo. Vale muito.", date: "1 semana" },
-  { name: "Eliane Macedo",      message: "Minha família toda usa em dispositivos diferentes ao mesmo tempo. Qualidade mantida em todos.", date: "1 semana" },
-  { name: "Thiago Cavalcanti",  message: "Resolução monstra, suporte ágil e preço justo. A combinação perfeita que eu procurava faz tempo.", date: "8 dias atrás" },
-  { name: "Larissa Guimarães",  message: "Já testei vários serviços do tipo e esse é o único que realmente entrega o que promete.", date: "8 dias atrás" },
-  { name: "Wellington Silva",   message: "Fiz o pagamento via Pix e em 3 minutos já estava configurado e funcionando. Muito eficiente!", date: "9 dias atrás" },
-  { name: "Bianca Ferreira",    message: "Atendimento impecável. Tiraram todas as minhas dúvidas antes de eu assinar. Confiança total.", date: "9 dias atrás" },
-  { name: "Adriano Costa",      message: "Uso em viagem pelo notebook via hotspot do celular e funciona perfeitamente. Flexibilidade incrível.", date: "10 dias atrás" },
-  { name: "Simone Ramos",       message: "O suporte mandou um tutorial em vídeo exclusivo para me ajudar na configuração. Cuidado raro.", date: "10 dias atrás" },
-  { name: "Leonardo Campos",    message: "Qualidade de imagem que o streaming pago não consegue entregar. Estou muito satisfeito.", date: "11 dias atrás" },
-  { name: "Cláudia Meireles",   message: "Indicou a melhor decisão que tomei esse ano. Economizei e ainda melhorei muito a qualidade.", date: "11 dias atrás" },
-  { name: "Márcio Araújo",      message: "Nunca imaginei que por esse preço a qualidade seria tão alta. Recomendo sem pensar duas vezes.", date: "12 dias atrás" },
-  { name: "Amanda Cavalcante",  message: "Suporte ativo 7 dias por semana. Mesmo no domingo de manhã me atenderam rapidinho. Parabéns!", date: "12 dias atrás" },
-  { name: "Flávio Peixoto",     message: "Minha TV antiga que não era Smart agora funciona conectada via Fire Stick. Qualidade excelente.", date: "13 dias atrás" },
-  { name: "Tereza Cristina",    message: "Uso faz 8 meses e minha nota é 10/10. Nunca precisei abrir reclamação nenhuma vez.", date: "13 dias atrás" },
-  { name: "Raul Monteiro",      message: "A grade de canais esportivos é a melhor que já vi. Cobre tudo que quero assistir ao vivo.", date: "2 semanas" },
-  { name: "Gisele Nogueira",    message: "Minha filha usa para filmes, eu uso para esportes e meu marido para séries. Cada um no seu dispositivo.", date: "2 semanas" },
-  { name: "Danilo Rocha",       message: "Assinei o plano semestral e em 6 meses não tive nenhuma queda de sinal. Resultado perfeito.", date: "2 semanas" },
-  { name: "Mônica Silveira",    message: "O suporte resolve tudo via mensagem, sem precisar ligar para ninguém. Muito prático para o dia a dia.", date: "2 semanas" },
-  { name: "Evandro Ferraz",     message: "Serviço extremamente estável. Mesmo com vários usuários simultâneos na minha casa, tudo liso.", date: "2 semanas" },
-  { name: "Letícia Sampaio",    message: "Qualidade de 4K sem travar mesmo com a internet não sendo das mais rápidas. Tecnologia de ponta.", date: "2 semanas" },
+const WaIcon = ({ size = 18 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.56 4.136 1.541 5.869L0 24l6.303-1.519A11.933 11.933 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.774 9.774 0 0 1-5.016-1.381l-.36-.214-3.741.901.957-3.638-.234-.374A9.769 9.769 0 0 1 2.182 12C2.182 6.566 6.566 2.182 12 2.182S21.818 6.566 21.818 12 17.434 21.818 12 21.818z" />
+  </svg>
+);
+
+const PLAN_LIST = [
+  "Canais ao vivo, filmes e séries",
+  "Full HD e 4K*",
+  "Smart TV, TV Box, celular e computador",
+  "[N] tela(s) ao mesmo tempo",
+  "Suporte humano no WhatsApp",
+  "Sem fidelidade",
 ];
 
-const PLANS = [
-  { name: "Mensal", price: "R$ 35,00", desc: "Ideal para experimentar.", popular: false },
-  { name: "Trimestral", price: "R$ 90,00", desc: "Economia garantida por 3 meses.", popular: false },
-  { name: "Semestral", price: "R$ 150,00", desc: "O equilíbrio perfeito.", popular: false },
-  { name: "Anual", price: "R$ 250,00", desc: "Melhor oferta: Economia de 40%", popular: true },
+const FAQ_ITEMS = [
+  { q: "Preciso de antena ou instalação?",         a: "Não. Funciona pela internet, no aparelho que você já tem." },
+  { q: "Tem fidelidade ou multa?",                 a: "Não. Você paga pelo período escolhido e renova se quiser." },
+  { q: "Posso ver funcionando antes de pagar?",    a: "Sim. Fale com o atendente e peça uma demonstração antes de pagar." },
+  { q: "Em quanto tempo começo a assistir?",       a: "Depois da confirmação do pagamento, o acesso é liberado em poucos minutos e o atendente ajuda na configuração." },
+  { q: "Quais as formas de pagamento?",            a: "Pix e cartão de crédito." },
+  { q: "Em quantas telas posso usar?",             a: "Consulte o atendente para confirmar o número de telas do seu plano." },
+  { q: "Funciona na minha TV?",                    a: "Funciona em Smart TV, TV Box, celular e computador. Na dúvida, chame o atendente e informe o modelo." },
+  { q: "E se eu me arrepender?",                   a: "Você tem 7 dias a partir da compra para desistir, conforme o Código de Defesa do Consumidor. Fale com o atendente para solicitar o reembolso." },
+  { q: "Qual o horário de atendimento?",           a: "Todos os dias, das 9h às 21h." },
 ];
-
-const PAGE_SIZE = 5;
-const TOTAL_PAGES = Math.ceil(TESTIMONIALS.length / PAGE_SIZE);
 
 export function ComprarPage() {
-  const [page, setPage] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const visibleTestimonials = TESTIMONIALS.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
-  const whatsappUrl = getWhatsAppLink("Olá, gostaria de _*comprar*_ o serviço, para conhecer melhor posso fazer um teste?", "COMPRA");
+  const waGeral      = getWhatsAppLink("Olá! Quero assinar. Pode me ajudar a escolher o plano?", "COMPRA");
+  const waAnual      = getWhatsAppLink("Olá! Quero assinar o plano Anual (R$ 250).", "COMPRA");
+  const waSemestral  = getWhatsAppLink("Olá! Quero assinar o plano Semestral (R$ 150).", "COMPRA");
+  const waTrimestral = getWhatsAppLink("Olá! Quero assinar o plano Trimestral (R$ 90).", "COMPRA");
+  const waMensal     = getWhatsAppLink("Olá! Quero assinar o plano Mensal (R$ 35).", "COMPRA");
 
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => {
-      setPage(p => (p + 1) % TOTAL_PAGES);
-    }, 3500);
-    return () => clearInterval(id);
-  }, [paused]);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="bg-brand-bg min-h-screen">
-      {/* Landing Page Header */}
-      <header className="h-20 bg-white border-b border-slate-200">
-        <div className="container-sleek h-full flex justify-between items-center">
+    <div className="bg-white min-h-screen text-gray-900 pb-20 md:pb-0">
+      {/* ── 1. BARRA DO TOPO ── */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-[1120px] mx-auto px-5 h-[72px] flex items-center justify-between">
           <Logo />
-          <a 
-            href={whatsappUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold text-xs uppercase hover:opacity-90 transition-smooth shadow-lg shadow-green-200 flex items-center gap-2"
-          >
-            Chamar No Whatsapp
+          <a href={waGeral} target="_blank" rel="noreferrer"
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 rounded-lg text-xs md:text-sm font-bold transition-colors whitespace-nowrap">
+            <WaIcon size={16} />
+            Assinar pelo WhatsApp
           </a>
         </div>
       </header>
-
-      <div className="container-sleek py-10 md:py-20">
-        {/* Banner de Oferta - Verde com bordas pretas grossas */}
-        <section id="testegratis" className="bg-[#22c55e] border-[6px] border-black mb-12 text-center p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] rounded-3xl">
-          <h2 className="text-black font-black uppercase tracking-tighter text-2xl md:text-3xl mb-6 italic">
-            🚀 OFERTA DE LANÇAMENTO EXCLUSIVA!
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <a 
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="group bg-red-600 p-5 rounded-2xl border-[3px] border-black shadow-lg transition-smooth hover:scale-105 hover:bg-black flex flex-col justify-center min-h-[140px]"
-            >
-              <span className="block text-white font-black text-lg mb-2">PLANO ANUAL</span>
-              <span className="text-white/90 text-sm font-bold uppercase tracking-tighter leading-tight">40% DE ECONOMIA REAL</span>
-            </a>
-            
-            <a 
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="group bg-red-600 p-5 rounded-2xl border-[3px] border-black shadow-lg transition-smooth hover:scale-105 hover:bg-black flex flex-col justify-center min-h-[140px]"
-            >
-              <span className="block text-white font-black text-lg mb-2">COMPRE 1 LEVE 2</span>
-              <span className="text-white/90 text-[10px] font-bold uppercase tracking-tighter leading-tight">
-                ASSINE AGORA E GANHE UMA SEGUNDA CONTA GRÁTIS POR 30 DIAS
-              </span>
-            </a>
-
-            <a 
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="group bg-red-600 p-5 rounded-2xl border-[3px] border-black shadow-lg transition-smooth hover:scale-105 hover:bg-black flex flex-col justify-center min-h-[140px]"
-            >
-              <span className="block text-white font-black text-lg mb-2">DESCONTO INICIAL</span>
-              <span className="text-white/90 text-sm font-bold uppercase tracking-tighter leading-tight">1º MÊS POR APENAS R$ 25,00</span>
-            </a>
-          </div>
-
-          <div className="bg-white/90 p-6 rounded-2xl border-[3px] border-black mb-8 inline-block w-full max-w-2xl">
-            <p className="text-black font-black text-xl md:text-2xl mb-4 animate-pulse">
-              ⚠️ SÓ RESTAM 5 VAGAS DISPONÍVEIS!
+      {/* ── 2. PRIMEIRA TELA ── */}
+      <section className="bg-white py-12 md:py-16">
+        <div className="max-w-[1120px] mx-auto px-5 grid grid-cols-1 md:grid-cols-[55%_45%] gap-10 md:gap-12 items-center">
+          <div className="flex flex-col gap-5">
+            <span className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-700 text-xs font-bold px-3.5 py-1.5 rounded-full w-fit">
+              Planos a partir de R$&nbsp;35/mês
+            </span>
+            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight text-gray-900">
+              Canais ao vivo, filmes e séries em um só plano
+            </h1>
+            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+              Assista na Smart TV, TV Box, celular ou computador. Sem antena, sem técnico e sem fidelidade.
             </p>
-            <p className="text-slate-800 font-bold text-sm md:text-base mb-6">
-              Conheça nosso serviço gratuitamente antes de comprar e valide nossa qualidade agora mesmo.
-            </p>
-            <a 
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-block bg-black text-white px-10 py-5 rounded-full font-black text-xl uppercase tracking-tighter hover:bg-slate-800 transition-smooth shadow-lg shadow-black/20"
-            >
-              QUERO SABER MAIS AGORA!
-            </a>
-          </div>
-
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 pt-4">
-             <div className="text-black font-black uppercase tracking-wider text-sm">
-               ESSA OPORTUNIDADE ACABA EM:
-             </div>
-             <div className="bg-black text-white p-2 rounded-lg border-2 border-white/20">
-                <Countdown />
-             </div>
-          </div>
-        </section>
-
-        <section className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-brand-primary mb-4 tracking-tight">
-            Escolha o Plano Ideal para Você
-          </h1>
-          <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed">
-            Acesso imediato, suporte premium e a melhor estabilidade do mercado garantida.
-          </p>
-        </section>
-
-        <section id="planos" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {PLANS.map((plan, i) => (
-            <div key={i} className={`card-sleek transition-smooth relative flex flex-col p-6 ${plan.popular ? 'border-brand-accent ring-2 ring-brand-accent/10 scale-105 z-10' : ''}`}>
-              {plan.popular && (
-                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-accent text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
-                  MAIS VENDIDO
+            <div className="flex flex-col gap-3">
+              <a href="#planos" className="flex items-center justify-center gap-2.5 bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-xl text-base md:text-lg font-bold transition-colors min-h-[52px]">
+                Ver planos e assinar
+              </a>
+              <a href={waGeral} target="_blank" rel="noreferrer"
+                className="flex items-center justify-center gap-2.5 bg-white hover:bg-green-50 text-green-600 border-2 border-green-600 px-6 py-4 rounded-xl text-base md:text-lg font-bold transition-colors min-h-[52px]">
+                <WaIcon size={20} />
+                Falar com um atendente
+              </a>
+            </div>
+            <div className="flex flex-wrap gap-4 pt-1">
+              {["Sem fidelidade", "Full HD e 4K*", "Suporte humano no WhatsApp"].map(s => (
+                <span key={s} className="flex items-center gap-1.5 text-sm font-semibold text-gray-700">
+                  <Check size={15} className="text-green-600 shrink-0" strokeWidth={2.5} />
+                  {s}
                 </span>
-              )}
-              <h3 className="text-xl font-bold mb-1 text-brand-primary">{plan.name}</h3>
-              <div className={`font-black text-brand-accent mb-4 tracking-tighter ${plan.name === 'Semestral' || plan.name === 'Anual' ? 'text-3xl' : 'text-4xl'}`}>
-                {plan.price}
-              </div>
-              <p className="text-xs text-slate-400 mb-8 font-bold uppercase tracking-wider">{plan.desc}</p>
-              
-              <ul className="space-y-4 mb-10 flex-1">
-                {["Acesso Premium Imediato", "Suporte VIP WhatsApp", "Atualizações Inclusas", "Sem Fidelidade"].map((item, j) => (
-                  <li key={j} className="flex items-center gap-3 text-sm text-slate-600 font-medium">
-                    <Check className="text-brand-success" size={18} strokeWidth={3} />
-                    {item}
+              ))}
+            </div>
+            <p className="text-xs text-gray-400">*A qualidade da imagem depende da sua internet.</p>
+          </div>
+          <div className="bg-gray-100 rounded-2xl border border-gray-200 aspect-[4/3] flex items-center justify-center">
+            <div className="text-center text-gray-400 text-xs px-6">
+              <svg className="w-14 h-14 mx-auto mb-2 opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" />
+              </svg>
+              Imagem: família assistindo TV na sala
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* ── 3. PLANOS ── */}
+      <section id="planos" className="bg-[#F6F7F9] py-14 md:py-20">
+        <div className="max-w-[1120px] mx-auto px-5">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Escolha seu plano</h2>
+            <p className="text-base text-gray-600">Todos os planos têm o mesmo conteúdo. Quanto maior o período, menor o preço por mês.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+            {/* Anual — destaque, primeiro no mobile */}
+            <div className="bg-white border-2 border-blue-600 rounded-2xl p-6 flex flex-col relative shadow-sm order-first md:order-last">
+              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-blue-100 text-blue-700 text-[11px] font-extrabold px-4 py-1 rounded-full whitespace-nowrap">
+                Melhor preço por mês
+              </span>
+              <div className="text-sm font-bold text-gray-500 mt-2 mb-1">Anual</div>
+              <div className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-none mb-1">R$&nbsp;250</div>
+              <div className="text-sm text-gray-500 mb-6">equivale a R$&nbsp;20,83 por mês &mdash; <span className="text-blue-700 font-bold">economia de 40%</span></div>
+              <ul className="flex flex-col gap-2.5 flex-1 mb-6">
+                {PLAN_LIST.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700 font-medium">
+                    <Check size={15} className="text-green-600 shrink-0 mt-0.5" strokeWidth={2.5} />{item}
                   </li>
                 ))}
               </ul>
-
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noreferrer"
-                className={`w-full py-4 rounded-lg font-bold text-sm uppercase tracking-widest text-center transition-smooth ${plan.popular ? 'bg-brand-accent text-white shadow-xl shadow-blue-200' : 'bg-slate-900 text-white hover:bg-black'}`}
-              >
-                Assinar Agora
+              <a href={waAnual} target="_blank" rel="noreferrer"
+                className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3.5 rounded-xl text-sm font-bold transition-colors">
+                <WaIcon size={16} />Assinar o Anual
               </a>
             </div>
-          ))}
-        </section>
-
-        {/* Social Proof */}
-        <section id="suporte" className="mb-20" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-          <div className="flex justify-between items-center mb-10">
-            <h2 className="text-2xl font-extrabold text-brand-primary uppercase tracking-widest opacity-40">
-              O que dizem nossos clientes
-            </h2>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => { setPaused(true); setPage(p => (p - 1 + TOTAL_PAGES) % TOTAL_PAGES); }}
-                className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-brand-accent hover:border-brand-accent transition-smooth"
-              >
-                <ChevronLeft size={16} />
-              </button>
-              <div className="flex gap-1.5">
-                {Array.from({ length: TOTAL_PAGES }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => { setPaused(true); setPage(i); }}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${page === i ? 'w-6 bg-brand-accent' : 'w-1.5 bg-slate-300 hover:bg-slate-400'}`}
-                  />
+            {/* Mensal */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col relative shadow-sm order-last md:order-first">
+              <div className="text-sm font-bold text-gray-500 mb-1">Mensal</div>
+              <div className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-none mb-1">R$&nbsp;35</div>
+              <div className="text-sm text-gray-500 mb-6">pague mês a mês</div>
+              <ul className="flex flex-col gap-2.5 flex-1 mb-6">
+                {PLAN_LIST.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700 font-medium">
+                    <Check size={15} className="text-green-600 shrink-0 mt-0.5" strokeWidth={2.5} />{item}
+                  </li>
                 ))}
-              </div>
-              <button
-                onClick={() => { setPaused(true); setPage(p => (p + 1) % TOTAL_PAGES); }}
-                className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-brand-accent hover:border-brand-accent transition-smooth"
-              >
-                <ChevronRight size={16} />
-              </button>
+              </ul>
+              <a href={waMensal} target="_blank" rel="noreferrer"
+                className="flex items-center justify-center gap-2 bg-white hover:bg-green-50 text-green-600 border-2 border-green-600 py-3.5 rounded-xl text-sm font-bold transition-colors">
+                <WaIcon size={16} />Assinar o Mensal
+              </a>
+            </div>
+            {/* Trimestral */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col relative shadow-sm order-last md:order-[2]">
+              <div className="text-sm font-bold text-gray-500 mb-1">Trimestral</div>
+              <div className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-none mb-1">R$&nbsp;90</div>
+              <div className="text-sm text-gray-500 mb-6">equivale a R$&nbsp;30 por mês</div>
+              <ul className="flex flex-col gap-2.5 flex-1 mb-6">
+                {PLAN_LIST.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700 font-medium">
+                    <Check size={15} className="text-green-600 shrink-0 mt-0.5" strokeWidth={2.5} />{item}
+                  </li>
+                ))}
+              </ul>
+              <a href={waTrimestral} target="_blank" rel="noreferrer"
+                className="flex items-center justify-center gap-2 bg-white hover:bg-green-50 text-green-600 border-2 border-green-600 py-3.5 rounded-xl text-sm font-bold transition-colors">
+                <WaIcon size={16} />Assinar o Trimestral
+              </a>
+            </div>
+            {/* Semestral */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col relative shadow-sm order-last md:order-[3]">
+              <div className="text-sm font-bold text-gray-500 mb-1">Semestral</div>
+              <div className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-none mb-1">R$&nbsp;150</div>
+              <div className="text-sm text-gray-500 mb-6">equivale a R$&nbsp;25 por mês</div>
+              <ul className="flex flex-col gap-2.5 flex-1 mb-6">
+                {PLAN_LIST.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700 font-medium">
+                    <Check size={15} className="text-green-600 shrink-0 mt-0.5" strokeWidth={2.5} />{item}
+                  </li>
+                ))}
+              </ul>
+              <a href={waSemestral} target="_blank" rel="noreferrer"
+                className="flex items-center justify-center gap-2 bg-white hover:bg-green-50 text-green-600 border-2 border-green-600 py-3.5 rounded-xl text-sm font-bold transition-colors">
+                <WaIcon size={16} />Assinar o Semestral
+              </a>
             </div>
           </div>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={page}
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.4 }}
-              className="grid grid-cols-1 md:grid-cols-5 gap-4"
-            >
-              {visibleTestimonials.map((t, i) => (
-                <div key={i} className="card-sleek flex flex-col gap-3 min-h-[200px]">
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, j) => <Star key={j} size={10} fill="#fbbf24" stroke="#fbbf24" />)}
-                  </div>
-                  <p className="text-[11px] text-slate-600 italic leading-snug flex-1">"{t.message}"</p>
-                  <div className="flex flex-col gap-1 pt-3 border-t border-slate-100">
-                    <span className="text-[10px] font-black text-brand-primary uppercase">{t.name}</span>
-                    <span className="text-[9px] font-bold text-slate-400">{t.date}</span>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
-
-          <p className="text-center text-[10px] text-slate-400 mt-4 font-medium">
-            {page * PAGE_SIZE + 1}–{Math.min((page + 1) * PAGE_SIZE, TESTIMONIALS.length)} de {TESTIMONIALS.length} avaliações
-          </p>
-        </section>
-
-        {/* Garantia */}
-        <section id="garantia" className="card-sleek bg-white p-8 md:p-12 flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto border-2 border-brand-accent/20">
-          <div className="bg-slate-50 p-6 rounded-full flex-shrink-0">
-            <ShieldCheck size={80} className="text-brand-success opacity-80" />
+          <p className="text-center text-sm text-gray-400 mt-5">Formas de pagamento: Pix e cartão de crédito.</p>
+        </div>
+      </section>
+      {/* ── 4. COMO ASSINAR EM 3 PASSOS ── */}
+      <section className="bg-white py-14 md:py-20">
+        <div className="max-w-[1120px] mx-auto px-5">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-10">Como assinar em 3 passos</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+            {[
+              { n: 1, title: "Escolha o plano e toque em \"Assinar\"", desc: "Você fala direto com um atendente no WhatsApp." },
+              { n: 2, title: "Confira funcionando", desc: "Antes de pagar, o atendente pode liberar uma demonstração para você ver na sua TV." },
+              { n: 3, title: "Pague e assista", desc: "Depois do pagamento o acesso é liberado e o atendente ajuda na instalação." },
+            ].map(step => (
+              <div key={step.n} className="flex flex-col gap-3">
+                <div className="w-11 h-11 rounded-full bg-blue-600 text-white text-xl font-extrabold flex items-center justify-center shrink-0">{step.n}</div>
+                <h3 className="text-base md:text-lg font-bold text-gray-900">{step.title}</h3>
+                <p className="text-sm md:text-base text-gray-600">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* ── 5. UMA ALTERNATIVA SIMPLES ── */}
+      <section className="bg-[#F6F7F9] py-14 md:py-20">
+        <div className="max-w-[1120px] mx-auto px-5">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-10">Uma alternativa simples à TV por assinatura</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { icon: (<svg className="w-10 h-10 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/><line x1="3" y1="3" x2="21" y2="21"/></svg>), title: "Canais fechados sem antena", desc: "Canais ao vivo pela internet, sem parabólica, sem cabo e sem visita de técnico." },
+              { icon: (<svg className="w-10 h-10 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,11 10,14" fill="currentColor" stroke="none"/></svg>), title: "Streaming completo", desc: "Filmes, séries e canais ao vivo num pacote só, em vez de pagar várias assinaturas." },
+              { icon: (<svg className="w-10 h-10 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>), title: "Na sua Smart TV ou TV Box", desc: "Funciona no aparelho que você já tem, e também no celular e no computador." },
+            ].map((card, i) => (
+              <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col gap-3 shadow-sm">
+                {card.icon}
+                <h3 className="text-base md:text-lg font-bold text-gray-900">{card.title}</h3>
+                <p className="text-sm md:text-base text-gray-600">{card.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* ── 6. FUNCIONA ONDE VOCÊ QUISER ── */}
+      <section className="bg-white py-14 md:py-20">
+        <div className="max-w-[1120px] mx-auto px-5 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-10">Funciona onde você quiser</h2>
+          <div className="flex flex-wrap gap-8 md:gap-12 justify-center mb-10">
+            {[
+              { label: "Smart TV", icon: <svg className="w-10 h-10 text-blue-600 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> },
+              { label: "TV Box", icon: <svg className="w-10 h-10 text-blue-600 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M9 6V4M15 6V4M12 18v2"/></svg> },
+              { label: "Celular", icon: <svg className="w-10 h-10 text-blue-600 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18v.01"/></svg> },
+              { label: "Computador", icon: <svg className="w-10 h-10 text-blue-600 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M2 17h20M12 17v3M8 20h8"/></svg> },
+            ].map(d => (
+              <div key={d.label} className="text-sm font-semibold text-gray-700">{d.icon}{d.label}</div>
+            ))}
+          </div>
+          <div className="bg-gray-50 border border-gray-200 rounded-xl px-6 py-5 max-w-xl mx-auto text-sm text-gray-600">
+            <strong className="text-gray-900">Internet recomendada:</strong> 10 Mbps para Full HD e 25 Mbps para 4K.
+          </div>
+        </div>
+      </section>
+      {/* ── 7. PERGUNTAS FREQUENTES ── */}
+      <section className="bg-[#F6F7F9] py-14 md:py-20">
+        <div className="max-w-[760px] mx-auto px-5">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">Perguntas frequentes</h2>
+          <div className="divide-y divide-gray-200">
+            {FAQ_ITEMS.map((item, i) => (
+              <div key={i}>
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between gap-4 py-5 text-left bg-transparent border-0">
+                  <span className="text-base font-bold text-gray-900">{item.q}</span>
+                  <span className="text-blue-600 text-2xl font-light leading-none shrink-0 select-none">{openFaq === i ? "−" : "+"}</span>
+                </button>
+                {openFaq === i && <p className="pb-5 text-sm md:text-base text-gray-600">{item.a}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* ── 8. CHAMADA FINAL ── */}
+      <section className="bg-blue-600 py-16 md:py-20 text-center px-5">
+        <div className="max-w-[1120px] mx-auto">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-3">Pronto para assistir?</h2>
+          <p className="text-base md:text-lg text-blue-100 mb-8">Escolha seu plano e fale com um atendente agora.</p>
+          <a href={waGeral} target="_blank" rel="noreferrer"
+            className="inline-flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl text-base md:text-lg font-bold transition-colors">
+            <WaIcon size={22} />Assinar pelo WhatsApp
+          </a>
+        </div>
+      </section>
+      {/* ── 9. RODAPÉ ── */}
+      <footer className="bg-gray-800 py-12 px-5">
+        <div className="max-w-[1120px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Filmes My View</p>
+            <p className="text-xs text-gray-500 leading-relaxed">Atendimento: todos os dias, das 9h às 21h.</p>
           </div>
           <div>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-brand-primary mb-6 tracking-tight">
-              Satisfeito ou seu dinheiro de volta.
-            </h2>
-            
-            <p className="text-slate-500 mb-4 leading-relaxed font-medium">
-              Temos tanta confiança na nossa qualidade que oferecemos <strong>7 dias de garantia incondicional</strong>. Se por qualquer motivo você não ficar satisfeito, devolvemos seu investimento integralmente, sem perguntas e sem complicação.
-            </p>
-
-            <div className="mb-8">
-              <p className="text-[10px] text-slate-400 leading-tight italic">
-                * somente na aquisição de algum produto fisico, serviços e acessos são disponibilizados automaticamente no ato do pagamento. A avaliação gratuita serve exatamente para o cliente comprar somente se estiver com certeza absoluta. Compre somente se tudo estiver funcionando corretamente e se te agradar.
-              </p>
-            </div>
-
-            <div className="badge-sleek w-fit">
-              <Clock size={16} />
-              COMPRA 100% SEGURA
+            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Links</p>
+            <div className="flex flex-col gap-1.5">
+              <a href="/privacidade" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">Política de Privacidade</a>
+              <a href="/termos"      className="text-xs text-gray-500 hover:text-gray-300 transition-colors">Termos de Uso</a>
+              <a href="/aviso-legal" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">Aviso Legal</a>
             </div>
           </div>
-        </section>
+          <div>
+            <p className="text-xs text-gray-600 leading-relaxed">© 2026 Filmes My View. Todos os direitos reservados.</p>
+          </div>
+        </div>
+      </footer>
+      {/* ── 10. BARRA FIXA CELULAR ── */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-[0_-2px_12px_rgba(0,0,0,0.08)] px-4 py-3 flex items-center justify-between gap-3 md:hidden z-50">
+        <div className="text-xs text-gray-600 font-semibold leading-tight">
+          A partir de <span className="text-gray-900 font-extrabold text-sm">R$&nbsp;35/mês</span>
+        </div>
+        <a href="#planos" className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-colors whitespace-nowrap">
+          Assinar
+        </a>
       </div>
     </div>
   );
