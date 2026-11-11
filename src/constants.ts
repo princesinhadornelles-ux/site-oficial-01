@@ -1,55 +1,82 @@
-/**
+﻿/**
  * Configuration for WhatsApp rotation and site constants
  */
 
 export const WHATSAPP_POOLS = {
   TESTE: [
-    "5519983880841", // Número 1
-    "5519988582346", // Número 2
-    "5519988932787", // Número 3
-    "5518981550717", // Número 4
-    "5519988741698", // Número 5
-    "5519987508959", // Número 6
-    "5519988792084", // Número 7
-    "5521979358021", // Número 8
-    "5519987741165", // Número 9
-    "5582956357635", // Número 10
+    "5511958588404", // ADS 8404
+    "5511963502553", // ADS 2553
+    "5511967923079", // ADS 3079
+    "5511958404455", // ADS 4455
+    "5561947584335", // ADS 4335
+    "5511957683118", // ADS 3118
+    "5517956936823", // ADS 6823
+    "5538956349892", // ADS 9892
   ],
   COMPRA: [
-    "5519983880841", // Número 1
-    "5519988582346", // Número 2
-    "5519988932787", // Número 3
-    "5518981550717", // Número 4
-    "5519988741698", // Número 5
-    "5519987508959", // Número 6
-    "5519988792084", // Número 7
-    "5521979358021", // Número 8
-    "5519987741165", // Número 9
-    "5582956357635", // Número 10
+    "5511958588404", // ADS 8404
+    "5511963502553", // ADS 2553
+    "5511967923079", // ADS 3079
+    "5511958404455", // ADS 4455
+    "5561947584335", // ADS 4335
+    "5511957683118", // ADS 3118
+    "5517956936823", // ADS 6823
+    "5538956349892", // ADS 9892
   ],
   COMPLETO: [
-    "5519983880841", // Número 1
-    "5519988582346", // Número 2
-    "5519988932787", // Número 3
-    "5518981550717", // Número 4
-    "5519988741698", // Número 5
-    "5519987508959", // Número 6
-    "5519988792084", // Número 7
-    "5521979358021", // Número 8
-    "5519987741165", // Número 9
-    "5582956357635", // Número 10
+    "5511958588404", // ADS 8404
+    "5511963502553", // ADS 2553
+    "5511967923079", // ADS 3079
+    "5511958404455", // ADS 4455
+    "5561947584335", // ADS 4335
+    "5511957683118", // ADS 3118
+    "5517956936823", // ADS 6823
+    "5538956349892", // ADS 9892
+  ],
+  HOME: [
+    "5511958588404", // ADS 8404
+    "5511963502553", // ADS 2553
+    "5511967923079", // ADS 3079
+    "5511958404455", // ADS 4455
+    "5561947584335", // ADS 4335
+    "5511957683118", // ADS 3118
+    "5517956936823", // ADS 6823
+    "5538956349892", // ADS 9892
   ]
 };
 
+/**
+ * Modal de pré-atendimento exibido ao clicar em qualquer botão de WhatsApp.
+ * - ativo: false => nenhum modal; os botões funcionam como antes.
+ * - modelo: 1 => nome + telefone | 2 => somente telefone (no modelo 2, nomeObrigatorio não tem efeito).
+ * - nomeObrigatorio / telefoneObrigatorio: true = obrigatório | false = opcional.
+ * O nome nunca sai do navegador. O telefone só é enviado ao GestAuto quando preenchido e válido.
+ */
+export const WHATSAPP_MODAL_CONFIG = {
+  ativo: true,
+  modelo: 2 as 1 | 2,
+  nomeObrigatorio: false,
+  telefoneObrigatorio: false,
+  titulo: "PARABÉNS..",
+  subtitulo: "Obrigado por nos escolher",
+  rotuloNome: "Seu nome",
+  placeholderNome: "Digite seu nome",
+  rotuloTelefone: "Seu WhatsApp",
+  placeholderTelefone: "(DDD) 99999-9999",
+  textoBotao: "Falar No Whatsapp - Gerar Teste",
+  textoContinuarSemPreencher: "QUERO CONTINUAR SEM PREENCHER",
+  textoFinalidade: "Usamos seu WhatsApp somente para identificar e agilizar o seu atendimento.",
+};
+
 export const SITE_CONFIG = {
-  name: "66.387.501 NATALIA SILVA DORNELLES",
-  email: "princesinhadornelles@gmail.com",
-  address: "QUADRA 32, 18, COND CONDOMINIO CENTRO OESTE IV AGUAS LINDAS DE GOIAS – GO, CEP: 72914-218",
-  cnpj: "66.387.501/0001-80",
-  description: "Filmes My View - O maior portal de recomendações de filmes e séries. Conteúdo 100% legal.",
-  regionTitle: "Atendimento em São José dos Campos e Região",
-  footerDisclaimer: "Este site não hospeda, transmite ou disponibiliza conteúdos audiovisuais. Apenas publicamos informações e recomendamos plataformas oficiais.",
-  copyright: "© 2026 Filmes My View - Portal em conformidade com Google Ads"
+  name: "Melhor Site Para Comprar IPTV",
+  email: "faleconosco@gmail.com",
+  address: "Localizado na Web",
+  cnpj: "***.***.***/****-**",
+  description: "Filmes My View - O maior portal de compra de IPTV e P2P",
+  regionTitle: "Atendimento 100% ONLINE",
+  footerDisclaimer: "Venha Conferir com um teste Gratuito de 2 horas",
+  copyright: "© 2026 Filmes My View - Melhor No Rank em 2026"
 };
 
 export type PoolType = keyof typeof WHATSAPP_POOLS;
@@ -70,7 +97,7 @@ export function getActiveWhatsApp(pool: PoolType = "TESTE"): string {
 }
 
 export function getWhatsAppLink(
-  message: string = "Olá, gostaria de saber mais sobre o guia Filmes My View.",
+  message: string = "Olá, gostaria de um teste gratuito.",
   pool: PoolType = "TESTE"
 ): string {
   const number = getActiveWhatsApp(pool);
