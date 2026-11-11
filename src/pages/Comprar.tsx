@@ -14,7 +14,6 @@ const PLAN_LIST = [
   "Canais ao vivo, filmes e séries",
   "Full HD e 4K*",
   "Smart TV, TV Box, celular e computador",
-  "[N] tela(s) ao mesmo tempo",
   "Suporte humano no WhatsApp",
   "Sem fidelidade",
 ];
@@ -86,13 +85,8 @@ export function ComprarPage() {
             </div>
             <p className="text-xs text-gray-400">*A qualidade da imagem depende da sua internet.</p>
           </div>
-          <div className="bg-gray-100 rounded-2xl border border-gray-200 aspect-[4/3] flex items-center justify-center">
-            <div className="text-center text-gray-400 text-xs px-6">
-              <svg className="w-14 h-14 mx-auto mb-2 opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" />
-              </svg>
-              Imagem: família assistindo TV na sala
-            </div>
+          <div className="rounded-2xl overflow-hidden border border-gray-200 aspect-[4/3]">
+            <img src="/images/familia-tv.jpg" alt="Família assistindo TV na sala" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
@@ -186,8 +180,8 @@ export function ComprarPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
             {[
               { n: 1, title: "Escolha o plano e toque em \"Assinar\"", desc: "Você fala direto com um atendente no WhatsApp." },
-              { n: 2, title: "Confira funcionando", desc: "Antes de pagar, o atendente pode liberar uma demonstração para você ver na sua TV." },
-              { n: 3, title: "Pague e assista", desc: "Depois do pagamento o acesso é liberado e o atendente ajuda na instalação." },
+              { n: 2, title: "Confira funcionando", desc: "Antes de pagar, peça ao atendente uma demonstração para ver funcionando na sua TV." },
+              { n: 3, title: "Pague e assista", desc: "Depois do pagamento, seu acesso é ativado e o atendente ajuda na instalação." },
             ].map(step => (
               <div key={step.n} className="flex flex-col gap-3">
                 <div className="w-11 h-11 rounded-full bg-blue-600 text-white text-xl font-extrabold flex items-center justify-center shrink-0">{step.n}</div>
