@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Configuration for WhatsApp rotation and site constants
  */
 
@@ -91,7 +91,7 @@ export function getActiveWhatsApp(pool: PoolType = "TESTE"): string {
   const diff = now.getTime() - startOfYear.getTime();
   const oneDay = 1000 * 60 * 60 * 24;
   const dayOfYear = Math.floor(diff / oneDay);
-  
+
   const index = dayOfYear % numbers.length;
   return numbers[index];
 }
