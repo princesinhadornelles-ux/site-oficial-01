@@ -53,7 +53,7 @@ export const WHATSAPP_POOLS = {
  * O nome nunca sai do navegador. O telefone só é enviado ao GestAuto quando preenchido e válido.
  */
 export const WHATSAPP_MODAL_CONFIG = {
-  ativo: true,
+  ativo: false,
   modelo: 2 as 1 | 2,
   nomeObrigatorio: false,
   telefoneObrigatorio: false,
