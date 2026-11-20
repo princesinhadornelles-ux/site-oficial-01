@@ -174,7 +174,7 @@ export function ComprarPage() {
         </div>
       </section>
       {/* ── 4. COMO ASSINAR EM 3 PASSOS ── */}
-      <section className="bg-white py-14 md:py-20">
+      <section id="como-assinar" className="bg-white py-14 md:py-20">
         <div className="max-w-[1120px] mx-auto px-5">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-10">Como assinar em 3 passos</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
@@ -212,7 +212,7 @@ export function ComprarPage() {
         </div>
       </section>
       {/* ── 6. FUNCIONA ONDE VOCÊ QUISER ── */}
-      <section className="bg-white py-14 md:py-20">
+      <section id="demonstracao" className="bg-white py-14 md:py-20">
         <div className="max-w-[1120px] mx-auto px-5 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-10">Funciona onde você quiser</h2>
           <div className="flex flex-wrap gap-8 md:gap-12 justify-center mb-10">
@@ -231,7 +231,7 @@ export function ComprarPage() {
         </div>
       </section>
       {/* ── 7. PERGUNTAS FREQUENTES ── */}
-      <section className="bg-[#F6F7F9] py-14 md:py-20">
+      <section id="perguntas" className="bg-[#F6F7F9] py-14 md:py-20">
         <div className="max-w-[760px] mx-auto px-5">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">Perguntas frequentes</h2>
           <div className="divide-y divide-gray-200">
